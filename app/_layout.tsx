@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 import '@/global.css';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Text } from 'react-native';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,6 +32,22 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+        <Stack.Screen
+          name='product/index'
+          options={{
+            headerTitle: 'Product',
+          }}
+        />
+        <Stack.Screen
+          name='product/[id]/index'
+          options={{
+            headerTitle: 'Product Detail',
+            headerTitleAlign: 'center',
+            headerRight: () => {
+              return <Text>Test</Text>;
+            },
+          }}
+        />
         <Stack.Screen name='+not-found' />
       </Stack>
     </ThemeProvider>
