@@ -1,12 +1,15 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, Text, Pressable } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
+import { useAuth } from '@/context/auth';
 
 export default function HomeScreen() {
+  const auth = useAuth();
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -51,6 +54,15 @@ export default function HomeScreen() {
       <Link className='mt-2 font-semibold text-blue-500 underline' href={'/product'}>
         Product Page
       </Link>
+      <Pressable
+        onPress={() => {
+          console.log('logout');
+          auth?.signOut();
+        }}
+        className='mt-2'
+      >
+        <Text className='underline'>Logout</Text>
+      </Pressable>
     </ParallaxScrollView>
   );
 }
