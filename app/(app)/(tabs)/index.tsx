@@ -1,5 +1,4 @@
 import { Image, StyleSheet, Platform, Text, Pressable } from 'react-native';
-
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -53,6 +52,9 @@ export default function HomeScreen() {
       </ThemedView>
       <Link className='mt-2 font-semibold text-blue-500 underline' href={'/product'}>
         Product Page
+      </Link>
+      <Link className='mt-2 font-semibold text-blue-500 underline' href={'/profile'}>
+        Profile Page
       </Link>
       <Pressable
         onPress={() => {

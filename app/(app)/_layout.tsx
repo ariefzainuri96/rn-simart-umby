@@ -13,22 +13,8 @@ const AppLayout = () => {
   return (
     <Stack>
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-      <Stack.Screen
-        name='product/index'
-        options={{
-          headerTitle: 'Product',
-        }}
-      />
-      <Stack.Screen
-        name='product/[id]/index'
-        options={{
-          headerTitle: 'Product Detail',
-          headerTitleAlign: 'center',
-          headerRight: () => {
-            return <Text>Test</Text>;
-          },
-        }}
-      />
+      <Stack.Screen name='product' options={{ headerShown: false }} />
+      <Stack.Screen name='profile/index' options={{ headerTitle: 'Profile' }} />
     </Stack>
   );
 };
