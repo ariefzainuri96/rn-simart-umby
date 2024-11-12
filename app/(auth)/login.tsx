@@ -1,21 +1,28 @@
 import { useAuth } from '@/context/auth';
 import { Link } from 'expo-router';
 import React from 'react';
-import { Button, Pressable, Text, View } from 'react-native';
+import { Button, Image, Pressable, ScrollView, Text, View } from 'react-native';
+import Constants from 'expo-constants';
 
 const LoginPage = () => {
   const auth = useAuth();
 
   return (
-    <View className='h-screen w-screen'>
-      <View className='flex h-full flex-col items-center justify-center'>
-        <Text>LoginPage</Text>
-        <Button title='Login' onPress={() => auth?.signIn()} />
-        <Link href={'/(auth)/register'} asChild>
-          <Pressable>{({ pressed }) => <Text className='mt-2 underline'>Register</Text>}</Pressable>
-        </Link>
+    <ScrollView className='h- screen w-screen bg-white'>
+      <View
+        style={{ paddingTop: Constants.statusBarHeight }}
+        className='flex flex-col items-center'
+      >
+        <Image
+          source={require('@/assets/images/umby-logo.png')}
+          style={{ width: 148, height: 144 }}
+        />
+        <Text className='font-SfPro600 text-primary mt-[1.5rem] p-0 text-[1.5rem]'>SIMART</Text>
+        <Text className='font-SfPro400 text-textPrimary text-[.875rem]'>
+          Sistem Informasi Aset Rumah Tangga
+        </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
