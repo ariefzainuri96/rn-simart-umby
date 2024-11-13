@@ -11,7 +11,7 @@ const LoginPage = () => {
   const { form, handleLogin, handleChange, state } = useLogin();
 
   return (
-    <ScrollView keyboardShouldPersistTaps={true} className='h- screen w-screen bg-white'>
+    <ScrollView keyboardShouldPersistTaps='always' className='h- screen w-screen bg-white'>
       <View
         style={{ paddingTop: Constants.statusBarHeight }}
         className='flex flex-col items-center px-[1.5rem] pb-[1.5rem]'

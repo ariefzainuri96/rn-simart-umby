@@ -33,7 +33,7 @@ export default function useLogin() {
   }
 
   async function handleLogin() {
-    Keyboard.dismiss();
+    if (state === RequestState.LOADING) return;
 
     const validate = LoginSchema.safeParse(form);
 
