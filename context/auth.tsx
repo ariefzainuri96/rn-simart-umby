@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, type PropsWithChildren 
 
 type TAuthContext = {
   session: string | null;
-  signIn: () => void;
+  signIn: (nis: string) => void;
   signOut: () => void;
 };
 
@@ -31,9 +31,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (session === null) return;
-
-    console.log('session => ', session);
-    console.log('segments => ', segments[0]);
 
     if (!session && segments[0] !== '(auth)') {
       router.replace('/(auth)/login');

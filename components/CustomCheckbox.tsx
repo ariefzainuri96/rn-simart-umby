@@ -15,8 +15,8 @@ const CustomCheckbox = ({ label, handleOnPress, className, ...props }: CustomChe
       <View className='flex flex-row items-center'>
         <Checkbox
           style={{
-            width: 24,
-            height: 24,
+            width: 20,
+            height: 20,
             borderWidth: 1.5,
             borderColor: '#BFBFBF',
             borderRadius: 4,
@@ -25,7 +25,7 @@ const CustomCheckbox = ({ label, handleOnPress, className, ...props }: CustomChe
           {...props}
         />
         {label && (
-          <Text className='font-SfPro500 text-textPrimary ml-4 line-clamp-1 text-ellipsis text-[.875rem]'>
+          <Text className='ml-4 line-clamp-1 text-ellipsis font-SfPro500 text-[.875rem] text-textPrimary'>
             {label}
           </Text>
         )}

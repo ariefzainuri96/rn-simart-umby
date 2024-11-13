@@ -1,6 +1,5 @@
 import React, { ComponentPropsWithoutRef } from 'react';
-import { Button, Pressable, Text, TouchableNativeFeedback, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, TouchableNativeFeedback, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 type CustomButtonProps = {
@@ -26,10 +25,7 @@ const CustomButton = ({
         {...props}
       >
         <View
-          className={twMerge(
-            'flex h-[53px] flex-row items-center justify-center rounded-[8px]',
-            Icon && 'gap-4'
-          )}
+          className={twMerge('flex h-[53px] flex-row items-center justify-center', Icon && 'gap-4')}
         >
           <Text className={twMerge('font-SfPro500 text-[.875rem] text-white', textColor)}>
             {label}

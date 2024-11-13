@@ -1,19 +1,17 @@
 import { useAuth } from '@/context/auth';
-import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { Button, Image, Pressable, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import CustomInput from '@/components/CustomInput';
 import CustomButton from '@/components/CustomButton';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import CustomCheckbox from '@/components/CustomCheckbox';
+import useLogin from '@/hooks/use-login';
 
 const LoginPage = () => {
-  const [check, setChecked] = useState(false);
-  const auth = useAuth();
+  const { form, handleLogin, handleChange, state } = useLogin();
 
   return (
-    <ScrollView className='h- screen w-screen bg-white'>
+    <ScrollView keyboardShouldPersistTaps={true} className='h- screen w-screen bg-white'>
       <View
         style={{ paddingTop: Constants.statusBarHeight }}
         className='flex flex-col items-center px-[1.5rem] pb-[1.5rem]'
@@ -29,22 +27,20 @@ const LoginPage = () => {
         <CustomInput
           className='mt-[3rem]'
           label='NIS'
-          onChange={(e) => {
-            console.log(e.nativeEvent.text);
-          }}
+          value={form.nis}
+          onChange={(e) => handleChange('nis', e.nativeEvent.text)}
+          error={(form.errors ?? []).find((item) => item.path.includes('nis'))?.message}
         />
         <CustomInput
           className='mt-[1.5rem]'
           label='Password'
-          onChange={(e) => {
-            console.log(e.nativeEvent.text);
-          }}
+          value={form.password}
+          onChange={(e) => handleChange('password', e.nativeEvent.text)}
           secureTextEntry={true}
+          error={(form.errors ?? []).find((item) => item.path.includes('password'))?.message}
         />
         <CustomButton
-          onPress={() => {
-            console.log('test');
-          }}
+          onPress={() => handleLogin()}
           className='mt-[2rem] w-full bg-primary'
           label={'Login Local'}
         />
@@ -56,11 +52,11 @@ const LoginPage = () => {
           textColor='text-primary'
           label={'Login SSO'}
         />
-        <View className='mt-4 flex w-full flex-row items-center gap-4'>
+        <View className='mt-2 flex w-full flex-row items-center gap-4'>
           <CustomCheckbox
-            handleOnPress={() => setChecked((value) => !value)}
-            value={check}
-            onValueChange={setChecked}
+            handleOnPress={() => handleChange('isRememberMe', !form.isRememberMe)}
+            value={form.isRememberMe}
+            onValueChange={(value) => handleChange('isRememberMe', value)}
             label='Ingatkan Saya'
           />
           <View className='flex flex-1 flex-row justify-end'>
