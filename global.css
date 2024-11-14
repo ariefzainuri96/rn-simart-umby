@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .sfPro300-14 {
+    @apply font-SfPro300 text-[.875rem] text-gray3;
+  }
+
+  .sfPro400-14 {
+    @apply font-SfPro400 text-[.875rem] text-gray3;
+  }
+
+  .sfPro500-14 {
+    @apply font-SfPro500 text-[.875rem] text-gray3;
+  }
+
+  .sfPro600-14 {
+    @apply font-SfPro600 text-[.875rem] text-gray3;
+  }
+
+  .sfPro700-14 {
+    @apply font-SfPro700 text-[.875rem] text-gray3;
+  }
+
+  .sfPro900-14 {
+    @apply font-SfPro900 text-[.875rem] text-gray3;
+  }
+
+  .sfPro300-12 {
+    @apply font-SfPro300 text-[.75rem] text-gray3;
+  }
+
+  .sfPro400-12 {
+    @apply font-SfPro400 text-[.75rem] text-gray3;
+  }
+
+  .sfPro500-12 {
+    @apply font-SfPro500 text-[.75rem] text-gray3;
+  }
+
+  .sfPro600-12 {
+    @apply font-SfPro600 text-[.75rem] text-gray3;
+  }
+
+  .sfPro700-12 {
+    @apply font-SfPro700 text-[.75rem] text-gray3;
+  }
+
+  .sfPro900-12 {
+    @apply font-SfPro900 text-[.75rem] text-gray3;
+  }
+}
