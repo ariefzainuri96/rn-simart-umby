@@ -11,6 +11,7 @@ export {
 } from 'expo-router';
 import 'react-native-reanimated';
 import '@/global.css';
+import AppInit from '@/components/AppInit';
 import { delay } from '@/helper/utils';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -36,21 +37,20 @@ export default function RootLayout() {
     if (error) throw error;
   }, [error]);
 
-  // useEffect(() => {
-  //   async function loadAssets() {
-  //     console.log('loadAssets');
-  //     await delay(1000);
+  useEffect(() => {
+    async function hideSplashScreen() {
+      await delay(1500);
 
-  //     SplashScreen.hideAsync();
-  //   }
+      SplashScreen.hideAsync();
+    }
 
-  //   if (loaded) {
-  //     loadAssets();
-  //   }
-  // }, [loaded]);
+    if (loaded) {
+      hideSplashScreen();
+    }
+  }, [loaded]);
 
   if (!loaded) {
-    return null;
+    return <AppInit />;
   }
 
   return (

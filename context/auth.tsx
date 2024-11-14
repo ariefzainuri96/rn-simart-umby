@@ -1,8 +1,7 @@
 import { useStorageState } from '@/hooks/use-storage-state';
 import { useRouter, useSegments } from 'expo-router';
 import { createContext, useContext, useEffect, type PropsWithChildren } from 'react';
-import { View } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
+import AppInit from '@/components/AppInit';
 
 type TAuthContext = {
   session: string | null;
@@ -33,9 +32,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     if (loading) return;
 
-    // hide splash screen after storage is loaded
-    SplashScreen.hideAsync();
-
     console.log(`currentSegments ${segments[0]}`);
 
     if (!session && segments[0] !== '(auth)') {
@@ -45,9 +41,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }, [loading, session, segments]);
 
-  // if (loading) {
-  //   return <View className='h-screen w-screen bg-white'></View>;
-  // }
+  if (loading) return <AppInit />;
 
   return (
     <AuthContext.Provider
