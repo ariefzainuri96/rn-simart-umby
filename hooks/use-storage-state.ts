@@ -24,11 +24,9 @@ export function useStorageState(key: string): UseStateHook<string> {
 
   // Get
   useEffect(() => {
-    // SecureStore.getItemAsync(key).then((value) => {
-    //   setState(value);
-    // });
-
-    setState(SecureStore.getItem(key));
+    SecureStore.getItemAsync(key).then((value) => {
+      setState(value);
+    });
   }, [key]);
 
   // Set

@@ -6,7 +6,6 @@ import { ZodValidationError } from '@/model/zod-validation-error';
 import { useEffect, useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { NIS, PASSWORD } from '@/constants/secure-store-key';
-import { Keyboard } from 'react-native';
 
 export default function useLogin() {
   const auth = useAuth();
@@ -55,14 +54,15 @@ export default function useLogin() {
 
     setState(RequestState.LOADING);
 
-    auth?.signIn(form.nis);
-
+    // simulate login
     await delay(1000);
 
     if (form.isRememberMe) {
       SecureStore.setItem(NIS, form.nis);
       SecureStore.setItem(PASSWORD, form.password);
     }
+
+    auth?.signIn(form.nis);
 
     setState(RequestState.SUCCESS);
   }

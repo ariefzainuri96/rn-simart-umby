@@ -31,7 +31,16 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "splashImage": "./assets/images/splash-image.png",
+          "iosScaleType": "centerCrop",
+          "resizeMode": "contain",
+          "backgroundColor": "#18469C"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

@@ -11,12 +11,14 @@ export {
 } from 'expo-router';
 import 'react-native-reanimated';
 import '@/global.css';
+import { delay } from '@/helper/utils';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     SfPro100: require('../assets/fonts/SF-Pro-Text-Thin.otf'),
@@ -34,11 +36,18 @@ export default function RootLayout() {
     if (error) throw error;
   }, [error]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+  // useEffect(() => {
+  //   async function loadAssets() {
+  //     console.log('loadAssets');
+  //     await delay(1000);
+
+  //     SplashScreen.hideAsync();
+  //   }
+
+  //   if (loaded) {
+  //     loadAssets();
+  //   }
+  // }, [loaded]);
 
   if (!loaded) {
     return null;

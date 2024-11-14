@@ -1,6 +1,8 @@
 import { useStorageState } from '@/hooks/use-storage-state';
 import { useRouter, useSegments } from 'expo-router';
-import { createContext, useContext, useEffect, useState, type PropsWithChildren } from 'react';
+import { createContext, useContext, useEffect, type PropsWithChildren } from 'react';
+import { View } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 
 type TAuthContext = {
   session: string | null;
@@ -15,11 +17,10 @@ export function useAuth() {
 
   if (process.env.NODE_ENV !== 'production') {
     if (!value) {
-      throw new Error('useAuth must be wrapped in a <AuthProvider />');
+      throw new Error('useAuth must be used inside an <AuthProvider />');
     }
   }
 
-  // Return the value from the context
   return value;
 }
 
@@ -27,29 +28,36 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const segments = useSegments();
   const router = useRouter();
 
-  const [[_, session], setSession] = useStorageState('session');
+  const [[loading, session], setSession] = useStorageState('session');
 
   useEffect(() => {
-    if (session === null) return;
+    if (loading) return;
+
+    // hide splash screen after storage is loaded
+    SplashScreen.hideAsync();
+
+    console.log(`currentSegments ${segments[0]}`);
 
     if (!session && segments[0] !== '(auth)') {
       router.replace('/(auth)/login');
     } else if (session && segments[0] !== '(app)') {
-      router.replace('/(app)/(tabs)/');
+      router.replace('/(app)/dashboard');
     }
-  }, [session, segments]);
+  }, [loading, session, segments]);
+
+  // if (loading) {
+  //   return <View className='h-screen w-screen bg-white'></View>;
+  // }
 
   return (
     <AuthContext.Provider
       value={{
         session: session,
-        signIn: () => {
-          setSession('xxx');
+        signIn: (value: string) => {
+          setSession(value);
         },
         signOut: () => {
           setSession(null);
-
-          router.replace('/(auth)/login');
         },
       }}
     >
