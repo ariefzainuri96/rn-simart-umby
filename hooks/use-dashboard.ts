@@ -14,22 +14,22 @@ export function useDashboard() {
 
     await delay(1000);
 
-    setNews((value) => [
-      ...value,
+    setNews([
       {
         title: 'Test Pengumuman 1',
         date: '2023-01-01',
-        description: 'Umum',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.',
       },
       {
         title: 'Test Pengumuman 2',
         date: '2023-01-01',
-        description: 'Umum',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.',
       },
       {
         title: 'Test Pengumuman 3',
         date: '2023-01-01',
-        description: 'Umum',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.',
       },
     ]);
 
@@ -43,5 +43,6 @@ export function useDashboard() {
   return {
     newsState,
     news,
+    getNews,
   };
 }

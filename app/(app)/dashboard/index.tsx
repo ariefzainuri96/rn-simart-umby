@@ -4,9 +4,13 @@ import React from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import NewsSection from './(section)/news-section';
 import { RequestState } from '@/model/common-enum';
+import HeaderSection from './(section)/header-section';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { NewsSkeleton } from './(component)/news-item';
+import CustomStateView from '@/components/CustomStateView';
 
 const DashboardPage = () => {
-  const { newsState, news } = useDashboard();
+  const { newsState, news, getNews } = useDashboard();
 
   return (
     <View className='relative h-screen w-screen'>
@@ -21,14 +25,23 @@ const DashboardPage = () => {
       </View>
 
       {/* content */}
-      <View className='absolute inset-0 z-10 h-full w-full'>
+      <SafeAreaView className='absolute inset-0 z-10 h-full w-full'>
         <ScrollView>
           <View className='flex flex-col items-start'>
-            {newsState === RequestState.LOADING && <Text>Loading...</Text>}
-            <NewsSection news={news} />
+            <HeaderSection />
+            <CustomStateView
+              state={newsState}
+              Content={<NewsSection news={news} />}
+              Loading={<NewsSkeleton />}
+              onRetry={() => {
+                getNews();
+                console.log('retry');
+              }}
+              errorMarginTop={16}
+            />
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </View>
   );
 };
