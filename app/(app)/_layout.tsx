@@ -4,7 +4,7 @@ import React from 'react';
 const AppLayout = () => {
   return (
     <Stack>
-      <Stack.Screen name='dashboard/index' />
+      <Stack.Screen name='dashboard/index' options={{ headerShown: false }} />
       <Stack.Screen name='product' options={{ headerShown: false }} />
     </Stack>
   );

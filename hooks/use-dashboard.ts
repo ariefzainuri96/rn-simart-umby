@@ -1,11 +1,38 @@
 import { delay } from '@/helper/utils';
 import { RequestState } from '@/model/common-enum';
+import { MenuModel } from '@/model/menu-model';
 import { NewsModel } from '@/model/news-model';
 import { useEffect, useState } from 'react';
+import IcManajemenInventaris from '@/assets/icons/ic-manajemen-inventaris.svg';
+import IcManajemenBarangPakaiHabis from '@/assets/icons/manajemen-barang-habis-pakai.svg';
+import IcManajemenAset from '@/assets/icons/manajemen-aset.svg';
+import IcTaskApproval from '@/assets/icons/ic-task-approval.svg';
 
 export function useDashboard() {
   const [newsState, setNewsState] = useState(RequestState.IDLE);
   const [news, setNews] = useState<NewsModel[]>([]);
+  const menus: MenuModel[] = [
+    {
+      title: 'Pengumuman',
+      icon: IcManajemenInventaris,
+      bgColor: '#438AF7',
+    },
+    {
+      title: 'Manajamen Barang Pakai Habis',
+      icon: IcManajemenBarangPakaiHabis,
+      bgColor: '#5856D6',
+    },
+    {
+      title: 'Manajemen Aset',
+      icon: IcManajemenAset,
+      bgColor: '#06B6D4',
+    },
+    {
+      title: 'Task Approval',
+      icon: IcTaskApproval,
+      bgColor: '#1FA836',
+    },
+  ];
 
   async function getNews() {
     if (newsState === RequestState.LOADING) return;
@@ -44,5 +71,6 @@ export function useDashboard() {
     newsState,
     news,
     getNews,
+    menus,
   };
 }

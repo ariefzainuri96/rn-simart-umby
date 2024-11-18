@@ -1,3 +1,4 @@
+import Column from '@/components/Column';
 import { getRandomNumber } from '@/helper/utils';
 import { NewsModel } from '@/model/news-model';
 import React from 'react';
@@ -17,13 +18,13 @@ export const NewsItem = ({ data }: { data: NewsModel }) => {
   };
 
   return (
-    <View
+    <Column
       style={{
         marginHorizontal: screenWidth * 0.05,
         width: screenWidth * 0.9,
         height: 155,
       }}
-      className='flex flex-col items-start rounded-md bg-[#213168] p-4'
+      className='rounded-md bg-[#213168] p-4'
     >
       <Text className='sfPro600-14 text-white'>{data.title}</Text>
       <Text className='sfPro400-12 mt-1 text-white'>{data.date}</Text>
@@ -38,7 +39,7 @@ export const NewsItem = ({ data }: { data: NewsModel }) => {
           </Text>
         )}
       </Text>
-    </View>
+    </Column>
   );
 };
 

@@ -8,9 +8,11 @@ import HeaderSection from './(section)/header-section';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NewsSkeleton } from './(component)/news-item';
 import CustomStateView from '@/components/CustomStateView';
+import Column from '@/components/Column';
+import MenuSection from './(section)/menu-section';
 
 const DashboardPage = () => {
-  const { newsState, news, getNews } = useDashboard();
+  const { newsState, news, menus, getNews } = useDashboard();
 
   return (
     <View className='relative h-screen w-screen'>
@@ -26,21 +28,21 @@ const DashboardPage = () => {
 
       {/* content */}
       <SafeAreaView className='absolute inset-0 z-10 h-full w-full'>
-        <ScrollView>
-          <View className='flex flex-col items-start'>
-            <HeaderSection />
-            <CustomStateView
-              state={newsState}
-              Content={<NewsSection news={news} />}
-              Loading={<NewsSkeleton />}
-              onRetry={() => {
-                getNews();
-                console.log('retry');
-              }}
-              errorMarginTop={16}
-            />
+        <Column className='h-full'>
+          <HeaderSection />
+          <CustomStateView
+            state={newsState}
+            Content={<NewsSection news={news} />}
+            Loading={<NewsSkeleton />}
+            onRetry={() => {
+              getNews();
+            }}
+            errorMarginTop={16}
+          />
+          <View className='mt-4 flex w-full flex-1 items-center rounded-tl-[32px] rounded-tr-[32px] bg-white p-4'>
+            <MenuSection menus={menus} />
           </View>
-        </ScrollView>
+        </Column>
       </SafeAreaView>
     </View>
   );
