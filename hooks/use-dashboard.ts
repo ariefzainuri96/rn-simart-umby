@@ -13,7 +13,7 @@ export function useDashboard() {
   const [news, setNews] = useState<NewsModel[]>([]);
   const menus: MenuModel[] = [
     {
-      title: 'Pengumuman',
+      title: 'Manajemen Inventaris',
       icon: IcManajemenInventaris,
       bgColor: '#438AF7',
     },

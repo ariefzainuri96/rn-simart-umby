@@ -7,7 +7,7 @@ export const DashboardLayout = () => {
       <Stack.Screen name='index' options={{ headerShown: false }} />
       <Stack.Screen name='manajemen-aset' />
       <Stack.Screen name='manajemen-barang-pakai-habis' />
-      <Stack.Screen name='pengumuman' />
+      <Stack.Screen name='manajemen-inventaris' />
       <Stack.Screen name='task-approval' />
     </Stack>
   );

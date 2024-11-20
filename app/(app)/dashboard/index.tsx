@@ -1,22 +1,28 @@
 import { useDashboard } from '@/hooks/use-dashboard';
 import { Stack } from 'expo-router';
 import React from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import NewsSection from './(section)/news-section';
-import { RequestState } from '@/model/common-enum';
 import HeaderSection from './(section)/header-section';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NewsSkeleton } from './(component)/news-item';
 import CustomStateView from '@/components/CustomStateView';
 import Column from '@/components/Column';
 import MenuSection from './(section)/menu-section';
+import { LinearGradient } from 'expo-linear-gradient';
+import IcScan from '@/assets/icons/ic-scan-qr.svg';
+import CustomAppbar from '@/components/CustomAppbar';
 
 const DashboardPage = () => {
   const { newsState, news, menus, getNews } = useDashboard();
 
   return (
     <View className='relative h-screen w-screen'>
-      <Stack.Screen options={{ headerShown: false }} />
+      <CustomAppbar
+        options={{
+          headerShown: false,
+        }}
+      />
 
       {/* background */}
       <View className='relative z-0 h-full w-full'>
@@ -39,9 +45,17 @@ const DashboardPage = () => {
             }}
             errorMarginTop={16}
           />
-          <View className='mt-4 flex w-full flex-1 items-center rounded-tl-[32px] rounded-tr-[32px] bg-white p-4'>
+          <Column className='mt-4 w-full flex-1 items-center rounded-tl-[32px] rounded-tr-[32px] bg-white p-4'>
             <MenuSection menus={menus} />
-          </View>
+            <LinearGradient
+              colors={['#1E3A8A', '#011754']}
+              className='flex flex-row items-center gap-[10px] p-4'
+              style={{ borderRadius: 1000 }}
+            >
+              <IcScan width={24} height={24} color={'#FFF'} />
+              <Text className='sfPro600-14 text-white'>Scan QR Code</Text>
+            </LinearGradient>
+          </Column>
         </Column>
       </SafeAreaView>
     </View>

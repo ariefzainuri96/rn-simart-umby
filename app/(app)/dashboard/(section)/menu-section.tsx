@@ -11,6 +11,7 @@ const MenuSection = ({ menus }: { menus: MenuModel[] }) => {
       keyExtractor={(item) => item.title}
       renderItem={({ item, index }) => <MenuItem index={index} menu={item} />}
       columnWrapperStyle={{ justifyContent: 'flex-start', alignItems: 'stretch' }}
+      style={{ flex: 1 }}
     />
   );
 };

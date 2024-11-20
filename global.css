@@ -50,4 +50,24 @@
   .sfPro900-12 {
     @apply font-SfPro900 text-[.75rem] text-gray3;
   }
+
+  .sfPro400-16 {
+    @apply font-SfPro400 text-[1rem] text-gray3;
+  }
+
+  .sfPro500-16 {
+    @apply font-SfPro500 text-[1rem] text-gray3;
+  }
+
+  .sfPro600-16 {
+    @apply font-SfPro600 text-[1rem] text-gray3;
+  }
+
+  .sfPro700-16 {
+    @apply font-SfPro700 text-[1rem] text-gray3;
+  }
+
+  .sfPro900-16 {
+    @apply font-SfPro900 text-[1rem] text-gray3;
+  }
 }

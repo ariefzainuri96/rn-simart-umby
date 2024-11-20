@@ -11,7 +11,7 @@ export const MenuItem = ({ menu, index }: { menu: MenuModel; index: number }) =>
   function routeTo() {
     switch (index) {
       case 0:
-        router.push('/(app)/dashboard/pengumuman');
+        router.push('/(app)/dashboard/manajemen-inventaris');
         break;
       case 1:
         router.push('/(app)/dashboard/manajemen-barang-pakai-habis');
