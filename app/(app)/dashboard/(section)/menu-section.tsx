@@ -1,7 +1,7 @@
 import { MenuModel } from '@/model/menu-model';
 import React from 'react';
 import { FlatList } from 'react-native';
-import { MenuItem } from '../(component)/menu-item';
+import MenuItem from '../(component)/menu-item';
 
 const MenuSection = ({ menus }: { menus: MenuModel[] }) => {
   return (

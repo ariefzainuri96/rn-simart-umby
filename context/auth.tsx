@@ -41,17 +41,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }, [loading, session, segments]);
 
-  if (loading) return <AppInit />;
+  if (loading) return null;
 
   return (
     <AuthContext.Provider
       value={{
-        session: session,
+        session: 'session',
         signIn: (value: string) => {
-          setSession(value);
+          // setSession(value);
         },
         signOut: () => {
-          setSession(null);
+          // setSession(null);
         },
       }}
     >

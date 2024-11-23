@@ -1,42 +1,48 @@
 import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
 type CustomAppbarProps = {
   headerTitle?: string;
-  statusBarTranslucent?: boolean;
-  statusBarStyle?: 'light' | 'dark';
   headerTintColor?: string;
   backgroundColor?: string;
+  translucent?: boolean;
+  statusBarStyle?: 'light' | 'dark';
   statusBarColor?: string;
 } & React.ComponentPropsWithoutRef<typeof Stack.Screen>;
 
 const CustomAppbar = ({
   headerTitle,
-  statusBarTranslucent = true,
   backgroundColor = '#1E3A8A',
   headerTintColor = '#FFF',
+  translucent = true,
   statusBarStyle = 'light',
   statusBarColor = '#00000066',
   ...props
 }: CustomAppbarProps) => {
   return (
-    <Stack.Screen
-      options={{
-        headerTitle: headerTitle,
-        headerTitleStyle: {
-          fontFamily: 'SfPro500',
-          fontSize: 18,
-        },
-        statusBarTranslucent: statusBarTranslucent,
-        statusBarStyle: statusBarStyle,
-        headerTintColor: headerTintColor,
-        statusBarColor: statusBarColor,
-        headerStyle: {
-          backgroundColor: backgroundColor,
-        },
-        ...props.options,
-      }}
-    />
+    <>
+      <StatusBar
+        translucent={translucent}
+        style={statusBarStyle}
+        backgroundColor={statusBarColor}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: headerTitle,
+          headerTitleStyle: {
+            fontFamily: 'SfPro500',
+            fontSize: 18,
+          },
+          headerTintColor: headerTintColor,
+          headerStyle: {
+            backgroundColor: backgroundColor,
+          },
+          ...props.options,
+        }}
+      />
+    </>
   );
 };
 

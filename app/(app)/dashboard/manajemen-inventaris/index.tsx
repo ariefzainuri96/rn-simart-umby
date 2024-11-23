@@ -2,7 +2,6 @@ import Column from '@/components/Column';
 import CommonMenu from '@/components/CommonMenu';
 import CustomAppbar from '@/components/CustomAppbar';
 import React from 'react';
-import { Text } from 'react-native';
 
 const ManajemenInvetarisPage = () => {
   return (

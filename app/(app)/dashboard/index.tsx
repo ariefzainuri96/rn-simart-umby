@@ -5,19 +5,23 @@ import { Image, Text, View } from 'react-native';
 import NewsSection from './(section)/news-section';
 import HeaderSection from './(section)/header-section';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NewsSkeleton } from './(component)/news-item';
+import NewsSkeleton from './(component)/news-item';
 import CustomStateView from '@/components/CustomStateView';
 import Column from '@/components/Column';
 import MenuSection from './(section)/menu-section';
 import { LinearGradient } from 'expo-linear-gradient';
 import IcScan from '@/assets/icons/ic-scan-qr.svg';
 import CustomAppbar from '@/components/CustomAppbar';
+import { StatusBar } from 'expo-status-bar';
+import Constants from 'expo-constants';
 
 const DashboardPage = () => {
   const { newsState, news, menus, getNews } = useDashboard();
 
   return (
     <View className='relative h-screen w-screen'>
+      {/* <StatusBar translucent style='light' backgroundColor='#00000066' /> */}
+
       <CustomAppbar
         options={{
           headerShown: false,
@@ -39,7 +43,15 @@ const DashboardPage = () => {
           <CustomStateView
             state={newsState}
             Content={<NewsSection news={news} />}
-            Loading={<NewsSkeleton />}
+            Loading={
+              <NewsSkeleton
+                data={{
+                  title: '',
+                  date: '',
+                  description: '',
+                }}
+              />
+            }
             onRetry={() => {
               getNews();
             }}

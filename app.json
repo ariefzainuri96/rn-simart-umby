@@ -7,6 +7,7 @@
     "icon": "./assets/images/umby-logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-image.png",
       "resizeMode": "contain",
@@ -15,6 +16,9 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "rn.simartumby.ios"
+    },
+    "androidStatusBar": {
+      "translucent": false
     },
     "android": {
       "adaptiveIcon": {
