@@ -6,7 +6,7 @@ import { Dimensions, Pressable, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { twMerge } from 'tailwind-merge';
 
-export const NewsItem = ({ data }: { data: NewsModel }) => {
+export default function NewsItem({ data }: { data: NewsModel }) {
   const { width: screenWidth } = Dimensions.get('window');
 
   const totalWord = 100;
@@ -41,7 +41,7 @@ export const NewsItem = ({ data }: { data: NewsModel }) => {
       </Text>
     </Column>
   );
-};
+}
 
 export const NewsSkeleton = () => {
   const { width: screenWidth } = Dimensions.get('window');

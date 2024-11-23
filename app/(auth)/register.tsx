@@ -9,7 +9,7 @@ const RegisterPage = () => {
     <View className='h-screen w-screen'>
       <View className='flex h-full flex-col items-center justify-center'>
         <Text>Register Page</Text>
-        <Button title='Login' onPress={() => auth?.signIn()} />
+        <Button title='Login' onPress={() => auth?.signIn('')} />
       </View>
     </View>
   );

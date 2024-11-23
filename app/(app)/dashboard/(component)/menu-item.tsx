@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { Dimensions, Pressable, Text, View } from 'react-native';
 
-export const MenuItem = ({ menu, index }: { menu: MenuModel; index: number }) => {
+export default function MenuItem({ menu, index }: { menu: MenuModel; index: number }) {
   const router = useRouter();
   const itemWidth = Dimensions.get('window').width / 3 - 16;
 
@@ -40,4 +40,4 @@ export const MenuItem = ({ menu, index }: { menu: MenuModel; index: number }) =>
       </Column>
     </Pressable>
   );
-};
+}
