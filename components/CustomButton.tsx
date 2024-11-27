@@ -20,10 +20,7 @@ const CustomButton = ({
 }: CustomButtonProps) => {
   return (
     <View className={twMerge('overflow-hidden rounded-[8px] bg-primary', className)}>
-      <TouchableNativeFeedback
-        // background={TouchableNativeFeedback.Ripple(rippleColor ?? '#BFBFBF', false)}
-        {...props}
-      >
+      <TouchableNativeFeedback {...props}>
         <View
           className={twMerge('flex h-[53px] flex-row items-center justify-center', Icon && 'gap-4')}
         >

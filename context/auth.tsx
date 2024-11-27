@@ -1,7 +1,6 @@
 import { useStorageState } from '@/hooks/use-storage-state';
 import { useRouter, useSegments } from 'expo-router';
 import { createContext, useContext, useEffect, type PropsWithChildren } from 'react';
-import AppInit from '@/components/AppInit';
 
 type TAuthContext = {
   session: string | null;
@@ -46,12 +45,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
   return (
     <AuthContext.Provider
       value={{
-        session: 'session',
+        session: session,
         signIn: (value: string) => {
-          // setSession(value);
+          setSession(value);
         },
         signOut: () => {
-          // setSession(null);
+          setSession(null);
         },
       }}
     >
