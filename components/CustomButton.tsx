@@ -8,6 +8,7 @@ type CustomButtonProps = {
   textColor?: string;
   className?: string;
   rippleColor?: string;
+  buttonHeight?: number;
 } & ComponentPropsWithoutRef<typeof TouchableNativeFeedback>;
 
 const CustomButton = ({
@@ -16,13 +17,17 @@ const CustomButton = ({
   className,
   rippleColor,
   textColor,
+  buttonHeight = 53,
   ...props
 }: CustomButtonProps) => {
   return (
     <View className={twMerge('overflow-hidden rounded-[8px] bg-primary', className)}>
       <TouchableNativeFeedback {...props}>
         <View
-          className={twMerge('flex h-[53px] flex-row items-center justify-center', Icon && 'gap-4')}
+          style={{
+            height: buttonHeight,
+          }}
+          className={twMerge('flex flex-row items-center justify-center', Icon && 'gap-4')}
         >
           <Text className={twMerge('font-SfPro500 text-[.875rem] text-white', textColor)}>
             {label}

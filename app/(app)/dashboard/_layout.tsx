@@ -10,6 +10,7 @@ export default function DashboardLayout() {
       <Stack.Screen name='manajemen-inventaris/index' />
       <Stack.Screen name='task-approval/index' />
       <Stack.Screen name='profile/index' />
+      <Stack.Screen name='scanner/index' />
     </Stack>
   );
 }

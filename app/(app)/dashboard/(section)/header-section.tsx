@@ -9,7 +9,7 @@ const HeaderSection = () => {
   return (
     <Row className='mt-4 gap-2 px-4'>
       <Text className='sfPro600-14 flex-1 text-[1.5rem] text-white'>SIMART</Text>
-      <View className='fl1ex size-[2.25rem] items-center justify-center rounded-full bg-[#FFFFFF26]'>
+      <View className='size-[2.25rem] items-center justify-center rounded-full bg-[#FFFFFF26]'>
         <IcBell />
       </View>
       <Link href={'/(app)/dashboard/profile/'}>

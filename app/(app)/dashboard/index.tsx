@@ -1,7 +1,6 @@
 import { useDashboard } from '@/hooks/use-dashboard';
-import { Stack } from 'expo-router';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import NewsSection from './(section)/news-section';
 import HeaderSection from './(section)/header-section';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,16 +11,13 @@ import MenuSection from './(section)/menu-section';
 import { LinearGradient } from 'expo-linear-gradient';
 import IcScan from '@/assets/icons/ic-scan-qr.svg';
 import CustomAppbar from '@/components/CustomAppbar';
-import { StatusBar } from 'expo-status-bar';
-import Constants from 'expo-constants';
+import { router } from 'expo-router';
 
 const DashboardPage = () => {
   const { newsState, news, menus, getNews } = useDashboard();
 
   return (
-    <View className='relative h-screen w-screen'>
-      {/* <StatusBar translucent style='light' backgroundColor='#00000066' /> */}
-
+    <View className='relative flex-1'>
       <CustomAppbar
         options={{
           headerShown: false,
@@ -29,7 +25,7 @@ const DashboardPage = () => {
       />
 
       {/* background */}
-      <View className='relative z-0 h-full w-full'>
+      <View className='relative z-0 flex-1'>
         <Image
           source={require('@/assets/images/splash-background.png')}
           className='h-full w-full'
@@ -37,8 +33,8 @@ const DashboardPage = () => {
       </View>
 
       {/* content */}
-      <SafeAreaView className='absolute inset-0 z-10 h-full w-full'>
-        <Column className='h-full'>
+      <SafeAreaView className='absolute inset-0 z-10 flex-1'>
+        <Column className='flex-1'>
           <HeaderSection />
           <CustomStateView
             state={newsState}
@@ -59,14 +55,21 @@ const DashboardPage = () => {
           />
           <Column className='mt-4 w-full flex-1 items-center rounded-tl-[32px] rounded-tr-[32px] bg-white p-4'>
             <MenuSection menus={menus} />
-            <LinearGradient
-              colors={['#1E3A8A', '#011754']}
-              className='flex flex-row items-center gap-[10px] p-4'
-              style={{ borderRadius: 1000 }}
+
+            <TouchableOpacity
+              onPress={() => {
+                router.push('/(app)/dashboard/scanner');
+              }}
             >
-              <IcScan width={24} height={24} color={'#FFF'} />
-              <Text className='sfPro600-14 text-white'>Scan QR Code</Text>
-            </LinearGradient>
+              <LinearGradient
+                colors={['#1E3A8A', '#011754']}
+                className='flex flex-row items-center gap-[10px] p-4'
+                style={{ borderRadius: 1000 }}
+              >
+                <IcScan width={24} height={24} color={'#FFF'} />
+                <Text className='sfPro600-14 text-white'>Scan QR Code</Text>
+              </LinearGradient>
+            </TouchableOpacity>
           </Column>
         </Column>
       </SafeAreaView>
