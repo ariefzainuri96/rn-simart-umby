@@ -43,10 +43,6 @@
           "iosScaleType": "centerCrop",
           "resizeMode": "contain",
           "backgroundColor": "#18469C",
-          "dark": {
-            "image": "./assets/splash-icon-dark.png",
-            "backgroundColor": "#000000"
-          },
           "imageWidth": 200
         }
       ],

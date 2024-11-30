@@ -2,13 +2,17 @@ import Column from '@/components/Column';
 import CustomAppbar from '@/components/CustomAppbar';
 import CustomButton from '@/components/CustomButton';
 import Row from '@/components/Row';
-import { Camera, CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import IcClose from '@/assets/icons/ic-close.svg';
 import IcFlash from '@/assets/icons/ic-flash.svg';
+import IcBorderBl from '@/assets/icons/ic-border-bl.svg';
+import IcBorderBr from '@/assets/icons/ic-border-br.svg';
+import IcBorderTl from '@/assets/icons/ic-border-tl.svg';
+import IcBorderTr from '@/assets/icons/ic-border-tr.svg';
 
 export default function ScannerPage() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -85,6 +89,14 @@ export default function ScannerPage() {
                 </View>
               </TouchableOpacity>
             </Row>
+            <Column className='w-full flex-1 items-center justify-center'>
+              <View className='relative h-[250px] w-[250px]'>
+                <IcBorderTl style={{ position: 'absolute', left: 0, top: 0 }} />
+                <IcBorderTr style={{ position: 'absolute', right: 0, top: 0 }} />
+                <IcBorderBl style={{ position: 'absolute', left: 0, bottom: 0 }} />
+                <IcBorderBr style={{ position: 'absolute', right: 0, bottom: 0 }} />
+              </View>
+            </Column>
           </Column>
         </SafeAreaView>
       </CameraView>

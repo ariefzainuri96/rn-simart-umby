@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { NewsModel } from '@/model/news-model';
-import Column from '@/components/Column';
 import Row from '@/components/Row';
 import { twMerge } from 'tailwind-merge';
 import NewsItem from '../(component)/news-item';
@@ -24,7 +23,7 @@ const NewsSection = ({ news }: { news: NewsModel[] }) => {
         data={news}
         mode='parallax'
         modeConfig={{
-          parallaxScrollingScale: 1,
+          parallaxScrollingScale: 1.0,
           parallaxScrollingOffset: 27.5,
         }}
         onProgressChange={(_, absolute) => {
