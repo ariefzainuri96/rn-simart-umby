@@ -4,7 +4,7 @@ import CustomButton from '@/components/CustomButton';
 import Row from '@/components/Row';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import IcClose from '@/assets/icons/ic-close.svg';
@@ -77,7 +77,7 @@ export default function ScannerPage() {
       >
         <SafeAreaView className='flex-1'>
           <Column className='flex-1'>
-            <Row className='w-full justify-between'>
+            <Row className='w-full justify-between p-6'>
               <TouchableOpacity onPress={() => router.back()}>
                 <View className='flex items-center justify-center rounded-full bg-[#FFFFFF26] p-2'>
                   <IcClose width={20} height={20} />
