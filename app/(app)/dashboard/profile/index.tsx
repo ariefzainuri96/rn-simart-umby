@@ -31,9 +31,6 @@ function ProfilePage() {
           <CustomInput label='User Name' editable={false} value='cahyo_' />
           <CustomInput label='NIS' editable={false} value='1291289' />
           <CustomInput label='NIDN' editable={false} value='10291092' />
-          <CustomInput label='NIDN' editable={false} value='10291092' />
-          <CustomInput label='NIDN' editable={false} value='10291092' />
-          <CustomInput label='NIDN' editable={false} value='10291092' />
           <CustomButton label={'EDIT PROFILE'} className='mt-4 w-full bg-[#4CD964]' />
         </Column>
         <CommonMenu title='Edit Password' className='mt-4' />

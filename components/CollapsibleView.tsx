@@ -1,24 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Pressable } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
 interface CollapsibleViewProps {
+  header: React.ReactNode;
   children: React.ReactNode;
-  isExpanded: boolean;
+  className?: string;
 }
 
-const CollapsibleView: React.FC<CollapsibleViewProps> = ({ children, isExpanded }) => {
+const CollapsibleView = ({ children, className, header }: CollapsibleViewProps) => {
+  const [expanded, setExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState<number | null>(null);
   const animationValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (contentHeight !== null) {
       Animated.timing(animationValue, {
-        toValue: isExpanded ? 1 : 0,
+        toValue: expanded ? 1 : 0,
         duration: 300,
         useNativeDriver: false,
       }).start();
     }
-  }, [contentHeight, isExpanded]);
+  }, [contentHeight, expanded]);
 
   const handleContentLayout = async (event: { nativeEvent: { layout: { height: number } } }) => {
     if (event.nativeEvent.layout.height === 0) return;
@@ -36,7 +39,8 @@ const CollapsibleView: React.FC<CollapsibleViewProps> = ({ children, isExpanded 
   });
 
   return (
-    <View>
+    <View className={twMerge('flex flex-col items-start', className)}>
+      <Pressable onPress={() => setExpanded((prev) => !prev)}>{header}</Pressable>
       <Animated.View
         style={{ height: contentHeight === null ? null : heightInterpolate, overflow: 'hidden' }}
       >

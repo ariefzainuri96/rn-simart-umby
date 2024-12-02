@@ -1,28 +1,27 @@
-import CollapsibleView from '@/components/CollapsibleView';
-import Column from '@/components/Column';
 import CustomAppbar from '@/components/CustomAppbar';
-import CustomExpandable from '@/components/CustomExpandable';
-import React, { useState } from 'react';
-import { Button, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
+import { FlatList, View } from 'react-native';
+import DataBarangAsetItem from './(component)/data-barang-aset-item';
+import CustomStateView from '@/components/CustomStateView';
+import { useDataBarangAset } from './(hooks)/use-data-barang-aset';
 
 export default function DataBarangAsetPage() {
-  const [expanded, setExpanded] = useState(false);
+  const { dataBarangAsetList, dataBarangAsetState } = useDataBarangAset();
 
   return (
-    <View className='flex-1'>
+    <View className='flex-1 bg-white'>
       <CustomAppbar options={{ headerTitle: 'Data Barang Aset' }} />
 
-      <ScrollView>
-        <Text onPress={() => setExpanded(!expanded)}>test</Text>
-        <CollapsibleView isExpanded={expanded}>
-          <Column>
-            <Text>Testing Expanded content</Text>
-            <Text>Testing Expanded content</Text>
-          </Column>
-        </CollapsibleView>
-        {/* <CustomExpandable title={'header'} content={'expanded'} /> */}
-      </ScrollView>
+      <CustomStateView
+        state={dataBarangAsetState}
+        Content={
+          <FlatList
+            className='flex-1 p-4'
+            data={dataBarangAsetList}
+            renderItem={({ item }) => <DataBarangAsetItem key={item.noBarang} data={item} />}
+          />
+        }
+      />
     </View>
   );
 }
