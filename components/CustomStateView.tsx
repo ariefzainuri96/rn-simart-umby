@@ -1,6 +1,6 @@
 import { RequestState } from '@/model/common-enum';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import Column from './Column';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -22,15 +22,21 @@ const CustomStateView = ({
   Content,
 }: CustomStateViewProps) => {
   if (state === RequestState.LOADING) {
-    return Loading ? <>{Loading}</> : <Text>Loading...</Text>;
+    return Loading ? (
+      <>{Loading}</>
+    ) : (
+      <View className='flex flex-1 items-center justify-center'>
+        <ActivityIndicator size={'small'} color={'#18469C'} />
+      </View>
+    );
   }
 
   if (state === RequestState.ERROR) {
     return Error ? (
       <>{Error}</>
     ) : (
-      <View style={{ marginTop: errorMarginTop }} className='flex w-full flex-row justify-center'>
-        <Column className='items-center gap-2 rounded-md bg-white p-3 shadow-md'>
+      <View className='flex flex-1 items-center justify-center'>
+        <Column className='items-center gap-2 rounded-md p-3'>
           <Text className='sfPro400-14 text-center text-gray1'>
             Failed to get data, please try again later.{' '}
             <Text onPress={onRetry} className='sfPro400-14 text-primary underline'>
