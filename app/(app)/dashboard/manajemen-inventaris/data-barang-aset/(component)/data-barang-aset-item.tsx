@@ -4,8 +4,8 @@ import CustomPopupMenu from '@/components/CustomPopupMenu';
 import Row from '@/components/Row';
 import { DataBarangAsetModel } from '@/model/data-barang-aset/data-barang-aset-model';
 import { Ionicons } from '@expo/vector-icons';
-import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Pressable, Text, View } from 'react-native';
+import { ReactNode, useEffect, useRef } from 'react';
+import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
 
 type DataBarangAsetItemProps = {
@@ -13,14 +13,57 @@ type DataBarangAsetItemProps = {
   className?: string;
 };
 
+type TDataBarangAsetMenu = {
+  title: string;
+  Icon: ReactNode;
+};
+
 export default function DataBarangAsetItem({ data, className }: DataBarangAsetItemProps) {
+  const menu: TDataBarangAsetMenu[] = [
+    {
+      title: 'Edit',
+      Icon: <Ionicons name='pencil' color={'#333333'} size={16} />,
+    },
+    {
+      title: 'Hapus',
+      Icon: <Ionicons name='trash-bin' color={'#FF5D5D'} size={16} />,
+    },
+  ];
+
   return (
     <Column className={twMerge('rounded-md bg-white p-4 shadow-md', className)}>
       <Row className='w-full'>
         <Text className='sfPro500-14 flex-1'>{data.namaBarang}</Text>
         <CustomPopupMenu
           triggerChild={<Ionicons name='ellipsis-vertical' size={16} color='#333333' />}
-        />
+        >
+          {menu.map((item, index) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  switch (index) {
+                    case 0:
+                      console.log(`Edit pressed`);
+                      break;
+                    case 1:
+                      console.log(`Hapus pressed`);
+                      break;
+                    default:
+                      break;
+                  }
+                }}
+              >
+                <Row className={twMerge('gap-2 py-2', index === 0 && 'border-b border-b-slate-50')}>
+                  {item.Icon}
+                  <Text className={twMerge('sfPro500-14', index === 1 && 'text-[#FF5D5D]')}>
+                    {item.title}
+                  </Text>
+                </Row>
+              </TouchableOpacity>
+            );
+          })}
+        </CustomPopupMenu>
       </Row>
 
       <Row className='mt-1 w-full'>

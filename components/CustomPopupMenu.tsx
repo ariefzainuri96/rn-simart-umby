@@ -1,24 +1,26 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, ReactNode } from 'react';
 import {
   View,
-  Text,
   TouchableOpacity,
   Modal,
   StyleSheet,
   Pressable,
   LayoutChangeEvent,
+  useWindowDimensions,
 } from 'react-native';
-
-type CustomPopupMenuProps = {
-  triggerChild: React.ReactNode;
-};
 
 type TSize = {
   width: number;
   height: number;
 };
 
-const CustomPopupMenu = ({ triggerChild }: CustomPopupMenuProps) => {
+type CustomPopupMenuProps = {
+  triggerChild: ReactNode;
+  children: ReactNode;
+};
+
+const CustomPopupMenu = ({ triggerChild, children }: CustomPopupMenuProps) => {
+  const dimension = useWindowDimensions();
   const [visible, setVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
   const [contentSize, setContentSize] = useState<TSize | null>(null);
@@ -26,9 +28,17 @@ const CustomPopupMenu = ({ triggerChild }: CustomPopupMenuProps) => {
 
   const toggleMenu = () => {
     if (!visible) {
-      // Measure the position of the button
-      triggerRef.current?.measure((height, px, py) => {
-        setMenuPosition({ top: py + height, left: px - (contentSize?.width ?? 0) });
+      triggerRef.current?.measureInWindow((x, y, width, height) => {
+        console.log('triggerRef -> ', x, y, height, contentSize);
+
+        const shouldPlaceAboveTrigger =
+          dimension.height - (y + height) - (contentSize?.height ?? 0) <= 0;
+
+        setMenuPosition({
+          top: y + height - (shouldPlaceAboveTrigger ? (contentSize?.height ?? 0) : 0), // Place menu below the button
+          left: x - (contentSize?.width ?? 0) + 20, // Align menu with the button's left edge
+        });
+
         setVisible(true);
       });
     } else {
@@ -36,23 +46,19 @@ const CustomPopupMenu = ({ triggerChild }: CustomPopupMenuProps) => {
     }
   };
 
-  const handleContentLayout = async (event: LayoutChangeEvent) => {
-    if (event.nativeEvent.layout.height === 0) return;
+  const handleContentLayout = (event: LayoutChangeEvent) => {
+    const layout = event.nativeEvent.layout;
 
     if (contentSize === null) {
-      const _layout = event.nativeEvent.layout;
-
-      console.log('layout', _layout);
-
       setContentSize({
-        width: _layout.width,
-        height: _layout.height,
+        width: layout.width,
+        height: layout.height,
       });
     }
   };
 
   return (
-    <>
+    <View className='relative'>
       {/* Button to open popup menu */}
       <TouchableOpacity ref={triggerRef} onPress={toggleMenu}>
         {triggerChild}
@@ -64,7 +70,7 @@ const CustomPopupMenu = ({ triggerChild }: CustomPopupMenuProps) => {
           transparent={true}
           visible={visible}
           animationType='fade'
-          onRequestClose={() => setVisible(false)} // Close menu when back button is pressed on Android
+          onRequestClose={() => setVisible(false)} // Close menu on back button press
         >
           <Pressable
             style={styles.overlay}
@@ -77,59 +83,39 @@ const CustomPopupMenu = ({ triggerChild }: CustomPopupMenuProps) => {
               ]}
               onLayout={handleContentLayout}
             >
-              <TouchableOpacity
-                onPress={() => console.log('option 1 clicked')}
-                style={styles.menuItem}
-              >
-                <Text style={styles.menuItemText}>Option 1</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => console.log('option 2 clicked')}
-                style={styles.menuItem}
-              >
-                <Text style={styles.menuItemText}>Option 2</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => console.log('option 3 clicked')}
-                style={styles.menuItem}
-              >
-                <Text style={styles.menuItemText}>Option 3</Text>
-              </TouchableOpacity>
+              {children}
             </View>
           </Pressable>
         </Modal>
       )}
-    </>
+
+      {contentSize === null && (
+        <View style={[styles.popupMenu, styles.hidden]} onLayout={handleContentLayout}>
+          {children}
+        </View>
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  menuButtonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.15)',
   },
   popupMenu: {
     backgroundColor: '#fff',
     borderRadius: 8,
-    width: 200,
-    padding: 10,
+    paddingHorizontal: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
   },
-  menuItem: {
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-  },
-  menuItemText: {
-    fontSize: 16,
-    color: '#333',
+  hidden: {
+    opacity: 0,
+    zIndex: -1,
   },
 });
 
