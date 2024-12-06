@@ -101,7 +101,7 @@ const CustomPopupMenu = ({ triggerChild, children }: CustomPopupMenuProps) => {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.15)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
   popupMenu: {
     backgroundColor: '#fff',
