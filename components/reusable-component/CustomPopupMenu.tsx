@@ -28,9 +28,7 @@ const CustomPopupMenu = ({ triggerChild, children }: CustomPopupMenuProps) => {
 
   const toggleMenu = () => {
     if (!visible) {
-      triggerRef.current?.measureInWindow((x, y, width, height) => {
-        console.log('triggerRef -> ', x, y, height, contentSize);
-
+      triggerRef.current?.measureInWindow((x, y, _, height) => {
         const shouldPlaceAboveTrigger =
           dimension.height - (y + height) - (contentSize?.height ?? 0) <= 0;
 

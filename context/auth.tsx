@@ -1,3 +1,4 @@
+import AppInit from '@/components/reusable-component/AppInit';
 import { useStorageState } from '@/hooks/use-storage-state';
 import { useRouter, useSegments } from 'expo-router';
 import { createContext, useContext, useEffect, type PropsWithChildren } from 'react';
@@ -31,16 +32,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     if (loading) return;
 
-    console.log(`currentSegments ${segments[0]}`);
-
     if (!session && segments[0] !== '(auth)') {
       router.replace('/(auth)/login');
     } else if (session && segments[0] !== '(app)') {
-      router.replace('/(app)/dashboard');
+      router.replace('/(app)');
     }
   }, [loading, session, segments]);
 
-  if (loading) return null;
+  if (loading) return <AppInit />;
 
   return (
     <AuthContext.Provider

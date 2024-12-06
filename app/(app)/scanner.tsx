@@ -1,10 +1,10 @@
-import Column from '@/components/Column';
-import CustomAppbar from '@/components/CustomAppbar';
-import CustomButton from '@/components/CustomButton';
-import Row from '@/components/Row';
+import Column from '@/components/reusable-component/Column';
+import CustomAppbar from '@/components/reusable-component/CustomAppbar';
+import CustomButton from '@/components/reusable-component/CustomButton';
+import Row from '@/components/reusable-component/Row';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import IcClose from '@/assets/icons/ic-close.svg';

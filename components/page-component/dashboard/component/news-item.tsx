@@ -1,6 +1,7 @@
-import Column from '@/components/Column';
+import Column from '@/components/reusable-component/Column';
 import { getRandomNumber } from '@/helper/utils';
 import { NewsModel } from '@/model/news-model';
+import { Link } from 'expo-router';
 import React from 'react';
 import { Dimensions, Pressable, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';

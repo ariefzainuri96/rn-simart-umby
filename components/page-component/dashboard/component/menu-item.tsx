@@ -1,4 +1,4 @@
-import Column from '@/components/Column';
+import Column from '@/components/reusable-component/Column';
 import { MenuModel } from '@/model/menu-model';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -11,16 +11,16 @@ export default function MenuItem({ menu, index }: { menu: MenuModel; index: numb
   function routeTo() {
     switch (index) {
       case 0:
-        router.push('/(app)/dashboard/manajemen-inventaris');
+        router.push('/(app)/(manajemen-inventaris)');
         break;
       case 1:
-        router.push('/(app)/dashboard/manajemen-barang-pakai-habis');
+        router.push('/(app)/manajemen-barang-pakai-habis');
         break;
       case 2:
-        router.push('/(app)/dashboard/manajemen-aset');
+        router.push('/(app)/manajemen-aset');
         break;
       case 3:
-        router.push('/(app)/dashboard/task-approval');
+        router.push('/(app)/task-approval');
         break;
       default:
         break;

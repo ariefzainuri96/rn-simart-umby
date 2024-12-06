@@ -1,5 +1,5 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Slot, Stack } from 'expo-router';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -11,11 +11,9 @@ export {
 } from 'expo-router';
 import 'react-native-reanimated';
 import '@/global.css';
-import AppInit from '@/components/AppInit';
+import AppInit from '@/components/reusable-component/AppInit';
 import { delay } from '@/helper/utils';
 import { configureReanimatedLogger, ReanimatedLogLevel } from 'react-native-reanimated';
-import LoginPage from './(auth)/login';
-import { Text } from 'react-native';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`

@@ -1,17 +1,17 @@
 import { useDashboard } from '@/hooks/use-dashboard';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import NewsSection from './(section)/news-section';
-import HeaderSection from './(section)/header-section';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import NewsSkeleton from './(component)/news-item';
-import CustomStateView from '@/components/CustomStateView';
-import Column from '@/components/Column';
-import MenuSection from './(section)/menu-section';
+import CustomStateView from '@/components/reusable-component/CustomStateView';
+import Column from '@/components/reusable-component/Column';
 import { LinearGradient } from 'expo-linear-gradient';
 import IcScan from '@/assets/icons/ic-scan-qr.svg';
-import CustomAppbar from '@/components/CustomAppbar';
+import CustomAppbar from '@/components/reusable-component/CustomAppbar';
 import { router } from 'expo-router';
+import NewsSkeleton from '@/components/page-component/dashboard/component/news-skeleton';
+import HeaderSection from '@/components/page-component/dashboard/section/header-section';
+import MenuSection from '@/components/page-component/dashboard/section/menu-section';
+import NewsSection from '@/components/page-component/dashboard/section/news-section';
 
 const DashboardPage = () => {
   const { newsState, news, menus, getNews } = useDashboard();
@@ -39,15 +39,7 @@ const DashboardPage = () => {
           <CustomStateView
             state={newsState}
             Content={<NewsSection news={news} />}
-            Loading={
-              <NewsSkeleton
-                data={{
-                  title: '',
-                  date: '',
-                  description: '',
-                }}
-              />
-            }
+            Loading={<NewsSkeleton />}
             onRetry={() => {
               getNews();
             }}
@@ -58,7 +50,7 @@ const DashboardPage = () => {
 
             <TouchableOpacity
               onPress={() => {
-                router.push('/(app)/dashboard/scanner');
+                router.push('/(app)/scanner');
               }}
             >
               <LinearGradient

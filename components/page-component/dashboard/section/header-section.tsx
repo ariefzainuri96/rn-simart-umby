@@ -1,8 +1,8 @@
-import Row from '@/components/Row';
+import Row from '@/components/reusable-component/Row';
 import React from 'react';
 import { Text, Touchable, TouchableOpacity, View } from 'react-native';
 import IcBell from '@/assets/icons/ic-bell.svg';
-import CustomGradientView from '@/components/CustomBGGradientIcon';
+import CustomGradientView from '@/components/reusable-component/CustomBGGradientIcon';
 import { Link } from 'expo-router';
 
 const HeaderSection = () => {
@@ -12,7 +12,7 @@ const HeaderSection = () => {
       <View className='size-[2.25rem] items-center justify-center rounded-full bg-[#FFFFFF26]'>
         <IcBell />
       </View>
-      <Link href={'/(app)/dashboard/profile/'}>
+      <Link href={'/(app)/profile'}>
         <CustomGradientView startColor={'#F66565'} endColor={'#E53C3C'}>
           <Text className='sfPro500-14 text-white'>S</Text>
         </CustomGradientView>

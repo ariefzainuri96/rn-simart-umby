@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { NewsModel } from '@/model/news-model';
-import Row from '@/components/Row';
+import Row from '@/components/reusable-component/Row';
 import { twMerge } from 'tailwind-merge';
-import NewsItem from '../(component)/news-item';
+import NewsItem from '../component/news-item';
 
 const NewsSection = ({ news }: { news: NewsModel[] }) => {
   const { width: screenWidth } = Dimensions.get('window');

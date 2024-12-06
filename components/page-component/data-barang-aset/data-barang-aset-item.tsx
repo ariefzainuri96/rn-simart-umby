@@ -1,9 +1,10 @@
-import CollapsibleView from '@/components/CollapsibleView';
-import Column from '@/components/Column';
-import CustomPopupMenu from '@/components/CustomPopupMenu';
-import Row from '@/components/Row';
+import CollapsibleView from '@/components/reusable-component/CollapsibleView';
+import Column from '@/components/reusable-component/Column';
+import CustomPopupMenu from '@/components/reusable-component/CustomPopupMenu';
+import Row from '@/components/reusable-component/Row';
 import { DataBarangAsetModel } from '@/model/data-barang-aset/data-barang-aset-model';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { ReactNode, useEffect, useRef } from 'react';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { twMerge } from 'tailwind-merge';
@@ -19,6 +20,7 @@ type TDataBarangAsetMenu = {
 };
 
 export default function DataBarangAsetItem({ data, className }: DataBarangAsetItemProps) {
+  const router = useRouter();
   const menu: TDataBarangAsetMenu[] = [
     {
       title: 'Edit',
@@ -45,6 +47,9 @@ export default function DataBarangAsetItem({ data, className }: DataBarangAsetIt
                   switch (index) {
                     case 0:
                       console.log(`Edit pressed`);
+                      router.push(
+                        `/(app)/(manajemen-inventaris)/data-barang-aset/${data.namaBarang}`
+                      );
                       break;
                     case 1:
                       console.log(`Hapus pressed`);

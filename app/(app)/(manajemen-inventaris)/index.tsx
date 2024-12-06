@@ -1,6 +1,6 @@
-import Column from '@/components/Column';
-import CommonMenu from '@/components/CommonMenu';
-import CustomAppbar from '@/components/CustomAppbar';
+import Column from '@/components/reusable-component/Column';
+import CommonMenu from '@/components/reusable-component/CommonMenu';
+import CustomAppbar from '@/components/reusable-component/CustomAppbar';
 import { useRouter } from 'expo-router';
 import React from 'react';
 
@@ -9,10 +9,10 @@ const ManajemenInvetarisPage = () => {
 
   return (
     <Column className='h-screen bg-white'>
-      <CustomAppbar headerTitle={'Manajemen Inventaris (2)'} />
+      <CustomAppbar headerTitle={'Manajemen Inventaris'} />
       <CommonMenu
         onPress={() => {
-          router.push('/(app)/dashboard/manajemen-inventaris/data-barang-aset');
+          router.push('/(app)/(manajemen-inventaris)/data-barang-aset');
         }}
         title='Data Barang Aset'
       />

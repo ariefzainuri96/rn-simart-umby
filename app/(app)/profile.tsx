@@ -1,15 +1,12 @@
-import Column from '@/components/Column';
-import CustomAppbar from '@/components/CustomAppbar';
-import CustomInput from '@/components/CustomInput';
-import { StatusBar } from 'expo-status-bar';
+import Column from '@/components/reusable-component/Column';
+import CustomAppbar from '@/components/reusable-component/CustomAppbar';
+import CustomInput from '@/components/reusable-component/CustomInput';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import useProfile from './use-profile';
-import CustomButton from '@/components/CustomButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import useProfile from '../../hooks/profile/use-profile';
+import CustomButton from '@/components/reusable-component/CustomButton';
 import Constants from 'expo-constants';
-import { Stack } from 'expo-router';
-import CommonMenu from '@/components/CommonMenu';
+import CommonMenu from '@/components/reusable-component/CommonMenu';
 
 function ProfilePage() {
   const {} = useProfile();
