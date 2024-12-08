@@ -12,7 +12,7 @@ function ProfilePage() {
   const {} = useProfile();
 
   return (
-    <View className='h-screen w-screen bg-white'>
+    <View className='flex-1 bg-white'>
       <CustomAppbar options={{ headerTitle: 'My Profile' }} />
       <ScrollView
         contentContainerStyle={{

@@ -11,7 +11,6 @@ export default function DashboardLayout() {
       <Stack.Screen name='task-approval' />
       <Stack.Screen name='profile' />
       <Stack.Screen name='scanner' />
-      <Stack.Screen name='product' />
     </Stack>
   );
 }
