@@ -1,5 +1,5 @@
+import { RequestState } from '@/helper/enums';
 import { delay } from '@/helper/utils';
-import { RequestState } from '@/model/common-enum';
 import { DataBarangAsetModel } from '@/model/data-barang-aset/data-barang-aset-model';
 import { useEffect, useState } from 'react';
 

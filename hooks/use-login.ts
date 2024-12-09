@@ -1,11 +1,11 @@
 import { useAuth } from '@/context/auth';
 import { delay } from '@/helper/utils';
-import { RequestState } from '@/model/common-enum';
 import { LoginForm, LoginSchema } from '@/model/login-form';
 import { ZodValidationError } from '@/model/zod-validation-error';
 import { useEffect, useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { NIS, PASSWORD } from '@/constants/secure-store-key';
+import { RequestState } from '@/helper/enums';
 
 export default function useLogin() {
   const auth = useAuth();

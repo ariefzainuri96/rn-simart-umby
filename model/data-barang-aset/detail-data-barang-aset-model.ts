@@ -1,0 +1,23 @@
+export type DetailDataBarangAsetModel = {
+  noInventaris?: string;
+  namaAset?: string;
+  deskripsiAset?: string;
+  spesifikasiAset?: string;
+  isAsetSPK?: boolean;
+  noSPK?: string;
+  vendor?: string;
+  tipeAset?: string;
+  kategoriAset?: string;
+  subKategoriAset?: string;
+  location?: string;
+  convidentality?: string;
+  integrity?: string;
+  availability?: string;
+  tanggalAkuisisi?: string;
+  tanggalDepresiasi?: string;
+  asetTerdepresiasi?: string;
+  sumberAset?: string;
+  jumlahAset?: string;
+  nvb?: string;
+  statusAset?: string;
+};

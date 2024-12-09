@@ -1,8 +1,7 @@
-import { RequestState } from '@/model/common-enum';
-import React from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import Column from './Column';
 import { Ionicons } from '@expo/vector-icons';
+import { RequestState } from '@/helper/enums';
 
 type CustomStateViewProps = {
   state: RequestState;

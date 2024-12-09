@@ -1,5 +1,4 @@
 import { delay } from '@/helper/utils';
-import { RequestState } from '@/model/common-enum';
 import { MenuModel } from '@/model/menu-model';
 import { NewsModel } from '@/model/news-model';
 import { useEffect, useState } from 'react';
@@ -7,6 +6,7 @@ import IcManajemenInventaris from '@/assets/icons/ic-manajemen-inventaris.svg';
 import IcManajemenBarangPakaiHabis from '@/assets/icons/manajemen-barang-habis-pakai.svg';
 import IcManajemenAset from '@/assets/icons/manajemen-aset.svg';
 import IcTaskApproval from '@/assets/icons/ic-task-approval.svg';
+import { RequestState } from '@/helper/enums';
 
 export function useDashboard() {
   const [newsState, setNewsState] = useState(RequestState.IDLE);
