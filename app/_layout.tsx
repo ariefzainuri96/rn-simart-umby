@@ -16,6 +16,11 @@ import { delay } from '@/helper/utils';
 import { configureReanimatedLogger, ReanimatedLogLevel } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { AppStateStatus, Platform } from 'react-native';
+import { focusManager } from 'react-query';
+import useOnlineManager from '@/hooks/use-online-manager';
+import useAppState from '@/hooks/use-app-state';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
@@ -46,6 +51,13 @@ export default function RootLayout() {
     SfPro900: require('../assets/fonts/SF-Pro-Text-Black.otf'),
   });
 
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: 2 } },
+  });
+
+  useOnlineManager();
+  useAppState();
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -68,14 +80,16 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider>
-        <AuthProvider>
-          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <Slot />
-          </ThemeProvider>
-        </AuthProvider>
-      </BottomSheetModalProvider>
-    </GestureHandlerRootView>
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <AuthProvider>
+            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+              <Slot />
+            </ThemeProvider>
+          </AuthProvider>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
   );
 }

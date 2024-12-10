@@ -7,9 +7,11 @@ import useProfile from '../../hooks/profile/use-profile';
 import CustomButton from '@/components/reusable-component/CustomButton';
 import Constants from 'expo-constants';
 import CommonMenu from '@/components/reusable-component/CommonMenu';
+import { useAuth } from '@/context/auth';
 
 function ProfilePage() {
   const {} = useProfile();
+  const auth = useAuth();
 
   return (
     <View className='flex-1 bg-white'>
@@ -31,7 +33,13 @@ function ProfilePage() {
           <CustomButton label={'EDIT PROFILE'} className='mt-4 w-full bg-[#4CD964]' />
         </Column>
         <CommonMenu title='Edit Password' className='mt-4' />
-        <CommonMenu title='Logout' textColor='#EB5757' />
+        <CommonMenu
+          title='Logout'
+          onPress={() => {
+            auth?.signOut();
+          }}
+          textColor='#EB5757'
+        />
       </ScrollView>
     </View>
   );

@@ -12,9 +12,10 @@ import NewsSkeleton from '@/components/page-component/dashboard/component/news-s
 import HeaderSection from '@/components/page-component/dashboard/section/header-section';
 import MenuSection from '@/components/page-component/dashboard/section/menu-section';
 import NewsSection from '@/components/page-component/dashboard/section/news-section';
+import { getState } from '@/helper/utils';
 
-const DashboardPage = () => {
-  const { newsState, news, menus, getNews } = useDashboard();
+export default function DashboardPage() {
+  const { menus, queryPengumuman } = useDashboard();
 
   return (
     <View className='relative flex-1'>
@@ -37,12 +38,10 @@ const DashboardPage = () => {
         <Column className='flex-1'>
           <HeaderSection />
           <CustomStateView
-            state={newsState}
-            Content={<NewsSection news={news} />}
+            state={getState(queryPengumuman.isLoading, queryPengumuman.isError)}
+            Content={<NewsSection news={queryPengumuman.data ?? []} />}
             Loading={<NewsSkeleton />}
-            onRetry={() => {
-              getNews();
-            }}
+            onRetry={() => queryPengumuman.refetch()}
             errorMarginTop={16}
           />
           <Column className='mt-4 w-full flex-1 items-center rounded-tl-[32px] rounded-tr-[32px] bg-white p-4'>
@@ -67,6 +66,4 @@ const DashboardPage = () => {
       </SafeAreaView>
     </View>
   );
-};
-
-export default DashboardPage;
+}

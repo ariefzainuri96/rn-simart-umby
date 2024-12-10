@@ -1,16 +1,14 @@
-import { delay } from '@/helper/utils';
 import { MenuModel } from '@/model/menu-model';
-import { NewsModel } from '@/model/news-model';
-import { useEffect, useState } from 'react';
 import IcManajemenInventaris from '@/assets/icons/ic-manajemen-inventaris.svg';
 import IcManajemenBarangPakaiHabis from '@/assets/icons/manajemen-barang-habis-pakai.svg';
 import IcManajemenAset from '@/assets/icons/manajemen-aset.svg';
 import IcTaskApproval from '@/assets/icons/ic-task-approval.svg';
-import { RequestState } from '@/helper/enums';
+import { useQuery } from '@tanstack/react-query';
+import useAxios from './use-axios';
+import { PengumumanResponse } from '@/networking/response/pengumuman-response';
 
 export function useDashboard() {
-  const [newsState, setNewsState] = useState(RequestState.IDLE);
-  const [news, setNews] = useState<NewsModel[]>([]);
+  const axios = useAxios();
   const menus: MenuModel[] = [
     {
       title: 'Manajemen Inventaris',
@@ -34,43 +32,15 @@ export function useDashboard() {
     },
   ];
 
-  async function getNews() {
-    if (newsState === RequestState.LOADING) return;
-
-    setNewsState(RequestState.LOADING);
-
-    await delay(1000);
-
-    setNews([
-      {
-        title: 'Test Pengumuman 1',
-        date: '2023-01-01',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.',
-      },
-      {
-        title: 'Test Pengumuman 2',
-        date: '2023-01-01',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.',
-      },
-      {
-        title: 'Test Pengumuman 3',
-        date: '2023-01-01',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.',
-      },
-    ]);
-
-    setNewsState(RequestState.SUCCESS);
-  }
-
-  useEffect(() => {
-    getNews();
-  }, []);
+  const queryPengumuman = useQuery({
+    queryKey: ['pengumuman'],
+    queryFn: async () => {
+      return (await axios.get<PengumumanResponse>('/pengumuman')).data.data;
+    },
+  });
 
   return {
-    newsState,
-    news,
-    getNews,
     menus,
+    queryPengumuman,
   };
 }

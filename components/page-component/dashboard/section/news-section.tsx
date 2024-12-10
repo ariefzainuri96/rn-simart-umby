@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import { NewsModel } from '@/model/news-model';
 import Row from '@/components/reusable-component/Row';
 import { twMerge } from 'tailwind-merge';
 import NewsItem from '../component/news-item';
+import { PengumumanData } from '@/networking/response/pengumuman-response';
 
-const NewsSection = ({ news }: { news: NewsModel[] }) => {
+const NewsSection = ({ news }: { news: PengumumanData[] }) => {
   const { width: screenWidth } = Dimensions.get('window');
 
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const renderItem = ({ item, index }: { item: NewsModel; index: number }) => {
+  const renderItem = ({ item, index }: { item: PengumumanData; index: number }) => {
     return <NewsItem data={item} />;
   };
 

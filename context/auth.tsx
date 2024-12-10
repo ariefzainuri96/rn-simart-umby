@@ -1,10 +1,12 @@
 import AppInit from '@/components/reusable-component/AppInit';
+import useAxios from '@/hooks/use-axios';
 import { useStorageState } from '@/hooks/use-storage-state';
+import { AxiosInstance } from 'axios';
 import { useRouter, useSegments } from 'expo-router';
-import { createContext, useContext, useEffect, type PropsWithChildren } from 'react';
+import { createContext, useContext, useEffect, useMemo, type PropsWithChildren } from 'react';
 
 type TAuthContext = {
-  session: string | null;
+  token: string | null;
   signIn: (nis: string) => void;
   signOut: () => void;
 };
@@ -27,29 +29,29 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const segments = useSegments();
   const router = useRouter();
 
-  const [[loading, session], setSession] = useStorageState('session');
+  const [[loading, token], setToken] = useStorageState('token');
 
   useEffect(() => {
     if (loading) return;
 
-    if (!session && segments[0] !== '(auth)') {
+    if (!token && segments[0] !== '(auth)') {
       router.replace('/(auth)/login');
-    } else if (session && segments[0] !== '(app)') {
+    } else if (token && segments[0] !== '(app)') {
       router.replace('/(app)');
     }
-  }, [loading, session, segments]);
+  }, [loading, token, segments]);
 
   if (loading) return <AppInit />;
 
   return (
     <AuthContext.Provider
       value={{
-        session: session,
+        token: token,
         signIn: (value: string) => {
-          setSession(value);
+          setToken(value);
         },
         signOut: () => {
-          setSession(null);
+          setToken(null);
         },
       }}
     >

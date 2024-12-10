@@ -1,5 +1,3 @@
-import { useAuth } from '@/context/auth';
-import React, { useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import CustomInput from '@/components/reusable-component/CustomInput';
@@ -8,7 +6,7 @@ import CustomCheckbox from '@/components/reusable-component/CustomCheckbox';
 import useLogin from '@/hooks/use-login';
 
 const LoginPage = () => {
-  const { form, handleLogin, handleChange, state } = useLogin();
+  const { form, handleLogin, queryLogin, handleChange } = useLogin();
 
   return (
     <ScrollView keyboardShouldPersistTaps='always' className='h- screen w-screen bg-white'>
@@ -40,6 +38,7 @@ const LoginPage = () => {
           error={(form.errors ?? []).find((item) => item.path.includes('password'))?.message}
         />
         <CustomButton
+          disabled={queryLogin.isLoading}
           onPress={() => handleLogin()}
           className='mt-[2rem] w-full bg-primary'
           label={'Login Local'}

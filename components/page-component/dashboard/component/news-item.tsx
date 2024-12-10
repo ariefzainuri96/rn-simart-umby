@@ -1,21 +1,17 @@
 import Column from '@/components/reusable-component/Column';
-import { getRandomNumber } from '@/helper/utils';
-import { NewsModel } from '@/model/news-model';
-import { Link } from 'expo-router';
+import { PengumumanData } from '@/networking/response/pengumuman-response';
 import React from 'react';
-import { Dimensions, Pressable, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { twMerge } from 'tailwind-merge';
+import { Dimensions, Text } from 'react-native';
 
-export default function NewsItem({ data }: { data: NewsModel }) {
+export default function NewsItem({ data }: { data: PengumumanData }) {
   const { width: screenWidth } = Dimensions.get('window');
 
   const totalWord = 100;
 
   const description = () => {
-    return data.description.length > totalWord
-      ? data.description.slice(0, totalWord) + '...'
-      : data.description;
+    return (data.pengumuman ?? '').length > totalWord
+      ? (data.pengumuman ?? '').slice(0, totalWord) + '...'
+      : data.pengumuman;
   };
 
   return (
@@ -31,7 +27,7 @@ export default function NewsItem({ data }: { data: NewsModel }) {
       <Text className='sfPro400-12 mt-1 text-white'>{data.date}</Text>
       <Text className='sfPro300-14 mt-2 leading-normal text-white'>
         {description()}{' '}
-        {data.description.length > totalWord && (
+        {(data.pengumuman ?? '').length > totalWord && (
           <Text
             className='sfPro300-14 text-[#2b6ccc] underline'
             onPress={() => console.log('Baca Selengkapnya')}
