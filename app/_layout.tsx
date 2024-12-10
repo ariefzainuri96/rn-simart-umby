@@ -2,7 +2,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from '@/hooks/theme/useColorScheme';
 import { AuthProvider } from '@/context/auth';
 import { useFonts } from 'expo-font';
 export {
@@ -18,8 +18,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { AppStateStatus, Platform } from 'react-native';
 import { focusManager } from 'react-query';
-import useOnlineManager from '@/hooks/use-online-manager';
-import useAppState from '@/hooks/use-app-state';
+import useOnlineManager from '@/hooks/networking/use-online-manager';
+import useAppState from '@/hooks/networking/use-app-state';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const unstable_settings = {

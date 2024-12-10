@@ -1,5 +1,5 @@
 import AppInit from '@/components/reusable-component/AppInit';
-import useAxios from '@/hooks/use-axios';
+import useAxios from '@/hooks/networking/use-axios';
 import { useStorageState } from '@/hooks/use-storage-state';
 import { AxiosInstance } from 'axios';
 import { useRouter, useSegments } from 'expo-router';

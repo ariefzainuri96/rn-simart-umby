@@ -4,7 +4,7 @@ import IcManajemenBarangPakaiHabis from '@/assets/icons/manajemen-barang-habis-p
 import IcManajemenAset from '@/assets/icons/manajemen-aset.svg';
 import IcTaskApproval from '@/assets/icons/ic-task-approval.svg';
 import { useQuery } from '@tanstack/react-query';
-import useAxios from './use-axios';
+import useAxios from './networking/use-axios';
 import { PengumumanResponse } from '@/networking/response/pengumuman-response';
 
 export function useDashboard() {

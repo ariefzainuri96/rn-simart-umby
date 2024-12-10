@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { NIS, PASSWORD } from '@/constants/secure-store-key';
 import { useQuery } from '@tanstack/react-query';
-import useAxios from './use-axios';
+import useAxios from './networking/use-axios';
 import { LoginResponse } from '@/networking/response/login-response';
 
 export default function useLogin() {
