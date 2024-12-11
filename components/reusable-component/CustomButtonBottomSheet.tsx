@@ -1,6 +1,6 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { ReactNode, useCallback, useMemo, useRef } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Dimensions, Pressable, Text } from 'react-native';
 import Column from './Column';
 import Row from './Row';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,6 +20,7 @@ export default function CustomButtonBottomSheet({
 }: CustomButtonBottomSheetProps) {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
+  const { height: screenHeight } = Dimensions.get('window');
   const snapPoints = useMemo(() => ['50%'], []);
 
   // callbacks
@@ -27,9 +28,9 @@ export default function CustomButtonBottomSheet({
     bottomSheetRef.current?.present();
   }, []);
 
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  // const handleSheetChanges = useCallback((index: number) => {
+  //   console.log('handleSheetChanges', index);
+  // }, []);
 
   const renderBackdrop = useCallback(
     (props: any) => <BottomSheetBackdrop appearsOnIndex={0} disappearsOnIndex={-1} {...props} />,
@@ -50,8 +51,10 @@ export default function CustomButtonBottomSheet({
       <BottomSheetModal
         snapPoints={snapPoints}
         ref={bottomSheetRef}
-        onChange={handleSheetChanges}
+        // onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
+        maxDynamicContentSize={screenHeight * 0.5}
+        handleComponent={null}
       >
         {children}
       </BottomSheetModal>

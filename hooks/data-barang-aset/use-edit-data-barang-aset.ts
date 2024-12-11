@@ -1,14 +1,14 @@
 import { RequestState } from '@/helper/enums';
-import { delay, generateRandomString } from '@/helper/utils';
+import { delay, generateRandomString, generateStringArray } from '@/helper/utils';
 import { DetailDataBarangAsetModel } from '@/model/data-barang-aset/detail-data-barang-aset-model';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function useEditDataBarangAset(id: string) {
   const [form, setForm] = useState<DetailDataBarangAsetModel>({});
   const [state, setState] = useState(RequestState.IDLE);
   const [vendorState, setVendorState] = useState(RequestState.IDLE);
   const [vendor, setVendor] = useState<string[]>([]);
-  let vendorPage = 1;
+  const vendorPage = useRef(1);
   const vendorMaxPage = 3;
 
   useEffect(() => {
@@ -18,15 +18,6 @@ export default function useEditDataBarangAset(id: string) {
 
   function handleChange(key: string, value: any) {
     setForm((prev) => ({ ...prev, [key]: value }));
-  }
-
-  function _generateStringArray(): string[] {
-    const array: string[] = [];
-    for (let i = 0; i < 10; i++) {
-      array.push(generateRandomString(6));
-    }
-
-    return array;
   }
 
   async function getVendor(isInitial: boolean = true) {
@@ -40,15 +31,17 @@ export default function useEditDataBarangAset(id: string) {
 
     if (isInitial) {
       setVendor([]);
-      vendorPage = 1;
+      vendorPage.current = 1;
       setVendorState(RequestState.IDLE);
     }
+
+    console.log('getVendor,', vendorPage.current);
 
     setVendorState(isInitial ? RequestState.LOADING : RequestState.LOADING_NEXT_PAGE);
 
     await delay(1500);
 
-    const data = _generateStringArray();
+    const data = generateStringArray();
 
     setVendorState(
       data.length === 0
@@ -58,11 +51,11 @@ export default function useEditDataBarangAset(id: string) {
         : RequestState.SUCCESS
     );
 
-    if (vendorPage < vendorMaxPage) {
+    if (vendorPage.current === vendorMaxPage) {
       setVendorState(RequestState.MAX_PAGE);
     }
 
-    vendorPage += 1;
+    vendorPage.current += 1;
     setVendor((prev) => [...prev, ...data]);
   }
 
@@ -108,5 +101,5 @@ Baterai : Li-Polimer, 49,9 Wh`,
     setState(RequestState.SUCCESS);
   }
 
-  return { form, handleChange, vendor, vendorState, state } as const;
+  return { form, handleChange, vendor, getVendor, vendorState, state } as const;
 }

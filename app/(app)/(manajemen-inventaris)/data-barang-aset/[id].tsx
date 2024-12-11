@@ -1,3 +1,4 @@
+import ButtonBottomSheet from '@/components/page-component/data-barang-aset/[id]/button-bottom-sheet';
 import Column from '@/components/reusable-component/Column';
 import CustomAppbar from '@/components/reusable-component/CustomAppbar';
 import CustomButtonBottomSheet from '@/components/reusable-component/CustomButtonBottomSheet';
@@ -5,6 +6,7 @@ import CustomCheckbox from '@/components/reusable-component/CustomCheckbox';
 import CustomInput from '@/components/reusable-component/CustomInput';
 import CustomStateView from '@/components/reusable-component/CustomStateView';
 import Row from '@/components/reusable-component/Row';
+import StandartBottomSheetItem from '@/components/reusable-component/StandartBottomSheetItem';
 import useEditDataBarangAset from '@/hooks/data-barang-aset/use-edit-data-barang-aset';
 import { BottomSheetView } from '@gorhom/bottom-sheet';
 import { useLocalSearchParams } from 'expo-router';
@@ -13,7 +15,9 @@ import { ScrollView, Text, View } from 'react-native';
 export default function DataBarangAsetDetailPage() {
   const { id } = useLocalSearchParams();
 
-  const { form, handleChange, state } = useEditDataBarangAset(id.toString());
+  const { form, handleChange, vendor, getVendor, vendorState, state } = useEditDataBarangAset(
+    id.toString()
+  );
 
   return (
     <View className='flex-1 bg-white'>
@@ -75,9 +79,19 @@ export default function DataBarangAsetDetailPage() {
                 />
 
                 <CustomButtonBottomSheet className='flex-1' label={'Vendor'} value={'Value'}>
-                  <BottomSheetView className='flex-1'>
-                    <Text>Bottom Sheet Content Vendor</Text>
-                  </BottomSheetView>
+                  <ButtonBottomSheet
+                    renderItem={(item, _) => (
+                      <StandartBottomSheetItem
+                        onPress={() => {
+                          console.log('click, ', item);
+                        }}
+                        content={item}
+                      />
+                    )}
+                    items={vendor}
+                    keyExtractor={(_, i) => i.toString()}
+                    onEndReached={() => getVendor(false)}
+                  />
                 </CustomButtonBottomSheet>
               </Row>
 

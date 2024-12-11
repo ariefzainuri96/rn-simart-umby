@@ -28,3 +28,12 @@ export function getState(isLoading: boolean = false, isError: boolean = false): 
 
   return RequestState.SUCCESS;
 }
+
+export function generateStringArray(total: number = 10): string[] {
+  const array: string[] = [];
+  for (let i = 0; i < total; i++) {
+    array.push(generateRandomString(6));
+  }
+
+  return array;
+}
