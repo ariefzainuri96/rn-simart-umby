@@ -1,9 +1,11 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { ReactNode, useCallback, useMemo, useRef } from 'react';
-import { Dimensions, Pressable, Text } from 'react-native';
+import { Dimensions, Pressable, Text, View } from 'react-native';
 import Column from './Column';
 import Row from './Row';
 import { Ionicons } from '@expo/vector-icons';
+import IcClose from '@/assets/icons/ic-close.svg';
+import IcBell from '@/assets/icons/ic-bell.svg';
 
 type CustomButtonBottomSheetProps = {
   label?: string;
@@ -49,13 +51,24 @@ export default function CustomButtonBottomSheet({
         </Pressable>
       </Column>
       <BottomSheetModal
-        snapPoints={snapPoints}
+        // leave it to empty if we want the height to be dynamic
+        // snapPoints={snapPoints}
         ref={bottomSheetRef}
         // onChange={handleSheetChanges}
         backdropComponent={renderBackdrop}
         maxDynamicContentSize={screenHeight * 0.5}
         handleComponent={null}
+        enablePanDownToClose={false}
       >
+        {/* Header */}
+        <Row className='w-full'>
+          <Pressable onPress={() => bottomSheetRef.current?.close()}>
+            <View className='flex size-10 items-center justify-center rounded-full bg-red-200'>
+              <IcBell />
+            </View>
+          </Pressable>
+          <Text className='flex-1'>Bottom Sheet</Text>
+        </Row>
         {children}
       </BottomSheetModal>
     </>

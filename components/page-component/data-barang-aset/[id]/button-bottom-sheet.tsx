@@ -17,7 +17,6 @@ export default function ButtonBottomSheet<T>({
 }: ButtonBottomSheetProps<T>) {
   return (
     <BottomSheetFlatList
-      scrollEnabled={true}
       data={items}
       keyExtractor={(item, index) => keyExtractor(item, index)}
       renderItem={({ item, index }: ListRenderItemInfo<T>) => renderItem(item, index)}

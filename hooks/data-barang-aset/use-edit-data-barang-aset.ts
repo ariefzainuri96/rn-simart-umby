@@ -9,7 +9,7 @@ export default function useEditDataBarangAset(id: string) {
   const [vendorState, setVendorState] = useState(RequestState.IDLE);
   const [vendor, setVendor] = useState<string[]>([]);
   const vendorPage = useRef(1);
-  const vendorMaxPage = 3;
+  const vendorMaxPage = 2;
 
   useEffect(() => {
     getDetailData();
