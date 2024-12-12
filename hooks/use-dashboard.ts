@@ -5,7 +5,7 @@ import IcManajemenAset from '@/assets/icons/manajemen-aset.svg';
 import IcTaskApproval from '@/assets/icons/ic-task-approval.svg';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from './networking/use-axios';
-import { PengumumanResponse } from '@/networking/response/pengumuman-response';
+import { PengumumanResponse } from '@/model/response/pengumuman-response';
 
 export function useDashboard() {
   const axios = useAxios();

@@ -1,29 +1,33 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
-import { ReactNode, useCallback, useMemo, useRef } from 'react';
-import { Dimensions, Pressable, Text, View } from 'react-native';
+import { ReactNode, useCallback, useEffect, useRef } from 'react';
+import { Dimensions, Pressable, Text } from 'react-native';
 import Column from './Column';
 import Row from './Row';
 import { Ionicons } from '@expo/vector-icons';
-import IcClose from '@/assets/icons/ic-close.svg';
-import IcBell from '@/assets/icons/ic-bell.svg';
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type CustomButtonBottomSheetProps = {
   label?: string;
-  value: string;
+  value?: string;
+  bottomSheetTitle?: string;
   children: ReactNode;
   className?: string;
+  enable?: boolean;
 };
 
 export default function CustomButtonBottomSheet({
   label,
   value,
   children,
+  enable = true,
+  bottomSheetTitle = 'Pilih Item',
   className,
 }: CustomButtonBottomSheetProps) {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   const { height: screenHeight } = Dimensions.get('window');
-  const snapPoints = useMemo(() => ['50%'], []);
+  // const snapPoints = useMemo(() => ['50%'], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -39,13 +43,24 @@ export default function CustomButtonBottomSheet({
     []
   );
 
+  useEffect(() => {
+    bottomSheetRef.current?.close();
+  }, [value]);
+
   return (
     <>
       <Column className={className}>
         {label && <Text className='sfPro500-14 text-gray3'>{label}</Text>}
         <Pressable onPress={handlePresentModalPress}>
-          <Row className='mt-1 w-full gap-2 rounded-[4px] border border-[#E0E0E0] px-4 py-3'>
-            <Text className='sfPro300-14 line-clamp-1 flex-1 text-ellipsis'>{value}</Text>
+          <Row
+            className={twMerge(
+              'mt-1 w-full gap-2 rounded-[4px] border border-[#E0E0E0] px-4 py-3',
+              !enable && 'bg-[#F8F8F8]'
+            )}
+          >
+            <Text className='sfPro300-14 line-clamp-1 flex-1 text-ellipsis'>
+              {value ?? `Pilih ${label}`}
+            </Text>
             <Ionicons name='chevron-down' size={16} color='#333333' />
           </Row>
         </Pressable>
@@ -61,13 +76,11 @@ export default function CustomButtonBottomSheet({
         enablePanDownToClose={false}
       >
         {/* Header */}
-        <Row className='w-full'>
+        <Row className='w-full gap-4 px-4 py-2'>
           <Pressable onPress={() => bottomSheetRef.current?.close()}>
-            <View className='flex size-10 items-center justify-center rounded-full bg-red-200'>
-              <IcBell />
-            </View>
+            <Ionicons name='close' size={20} color={'#333333'} />
           </Pressable>
-          <Text className='flex-1'>Bottom Sheet</Text>
+          <Text className='flex-1'>{bottomSheetTitle}</Text>
         </Row>
         {children}
       </BottomSheetModal>

@@ -4,7 +4,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import Row from '@/components/reusable-component/Row';
 import { twMerge } from 'tailwind-merge';
 import NewsItem from '../component/news-item';
-import { PengumumanData } from '@/networking/response/pengumuman-response';
+import { PengumumanData } from '@/model/response/pengumuman-response';
 
 const NewsSection = ({ news }: { news: PengumumanData[] }) => {
   const { width: screenWidth } = Dimensions.get('window');

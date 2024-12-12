@@ -78,7 +78,7 @@ export default function useAxios() {
   const auth = useAuth();
 
   const axiosInstance = axios.create({
-    baseURL: 'http://192.168.124.187:9000',
+    baseURL: 'http://192.168.165.161:9000',
     timeout: 10000,
     headers: {
       'Content-Type': 'application/json',

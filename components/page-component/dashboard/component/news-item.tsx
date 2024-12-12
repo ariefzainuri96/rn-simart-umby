@@ -1,5 +1,5 @@
 import Column from '@/components/reusable-component/Column';
-import { PengumumanData } from '@/networking/response/pengumuman-response';
+import { PengumumanData } from '@/model/response/pengumuman-response';
 import React from 'react';
 import { Dimensions, Text } from 'react-native';
 
