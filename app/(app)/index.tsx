@@ -42,7 +42,9 @@ export default function DashboardPage() {
             Content={<NewsSection news={queryPengumuman.data ?? []} />}
             Loading={<NewsSkeleton />}
             onRetry={() => queryPengumuman.refetch()}
+            viewHeight={179 + 24}
             errorMarginTop={16}
+            istextShouldWhite
           />
           <Column className='mt-4 w-full flex-1 items-center rounded-tl-[32px] rounded-tr-[32px] bg-white p-4'>
             <MenuSection menus={menus} />

@@ -37,3 +37,16 @@ export function generateStringArray(total: number = 10): string[] {
 
   return array;
 }
+
+export async function catchError<T>(promise: Promise<T>): Promise<[undefined, T] | [Error]> {
+  try {
+    const data = await promise;
+    return [undefined, data] as [undefined, T];
+  } catch (error) {
+    return [error] as [Error];
+  }
+}
+
+export function defaultValue(value: string | null | undefined, defaultValue: string): string {
+  return value === null || value === undefined || value.trim() === '' ? defaultValue : value;
+}

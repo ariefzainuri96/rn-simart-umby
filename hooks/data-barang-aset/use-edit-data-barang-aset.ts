@@ -96,8 +96,8 @@ export default function useEditDataBarangAset(id: string) {
         convidentality: '',
         integrity: '',
         availability: '',
-        tanggalAkuisisi: '',
-        tanggalDepresiasi: '',
+        tanggalAkuisisi: '10/12/2024',
+        tanggalDepresiasi: '20/12/2024',
         asetTerdepresiasi: '',
         sumberAset: '',
         jumlahAset: '',
@@ -105,7 +105,7 @@ export default function useEditDataBarangAset(id: string) {
         statusAset: '',
       };
 
-      if (data) setForm(data);
+      setForm(data);
 
       return data;
     },

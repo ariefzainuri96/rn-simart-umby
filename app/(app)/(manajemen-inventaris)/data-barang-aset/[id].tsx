@@ -8,8 +8,9 @@ import CustomInput from '@/components/reusable-component/CustomInput';
 import CustomStateView from '@/components/reusable-component/CustomStateView';
 import Row from '@/components/reusable-component/Row';
 import StandartBottomSheetItem from '@/components/reusable-component/StandartBottomSheetItem';
-import { getState } from '@/helper/utils';
+import { defaultValue, getState } from '@/helper/utils';
 import useEditDataBarangAset from '@/hooks/data-barang-aset/use-edit-data-barang-aset';
+import { format, parse } from 'date-fns';
 import { useLocalSearchParams } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 
@@ -86,7 +87,11 @@ export default function DataBarangAsetDetailPage() {
                   onChange={(e) => handleChange('noSPK', e.nativeEvent.text)}
                 />
 
-                <CustomButtonBottomSheet className='flex-1' label={'Vendor'} value={form.vendor}>
+                <CustomButtonBottomSheet
+                  className='flex-1'
+                  label={'Vendor'}
+                  value={defaultValue(form.vendor, 'Pilih Vendor')}
+                >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
                       <StandartBottomSheetItem
@@ -105,7 +110,7 @@ export default function DataBarangAsetDetailPage() {
                 <CustomButtonBottomSheet
                   className='flex-1'
                   label={'Kategori Aset'}
-                  value={form.kategoriAset}
+                  value={defaultValue(form.kategoriAset, 'Pilih Kategori Aset')}
                 >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
@@ -123,7 +128,7 @@ export default function DataBarangAsetDetailPage() {
                 <CustomButtonBottomSheet
                   className='flex-1'
                   label={'Sub Kategori Aset'}
-                  value={form.subKategoriAset}
+                  value={defaultValue(form.subKategoriAset, 'Pilih Sub Kategori Aset')}
                 >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
@@ -140,7 +145,11 @@ export default function DataBarangAsetDetailPage() {
               </Row>
 
               <Row className='w-full gap-3'>
-                <CustomButtonBottomSheet className='flex-1' label={'Lokasi'} value={form.location}>
+                <CustomButtonBottomSheet
+                  className='flex-1'
+                  label={'Lokasi'}
+                  value={defaultValue(form.location, 'Pilih Lokasi')}
+                >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
                       <StandartBottomSheetItem
@@ -157,7 +166,7 @@ export default function DataBarangAsetDetailPage() {
                 <CustomButtonBottomSheet
                   className='flex-1'
                   label={'Availability'}
-                  value={form.availability}
+                  value={defaultValue(form.availability, 'Pilih Availability')}
                 >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
@@ -176,7 +185,7 @@ export default function DataBarangAsetDetailPage() {
                 <CustomButtonBottomSheet
                   className='flex-1'
                   label={'Convidentality'}
-                  value={form.convidentality}
+                  value={defaultValue(form.convidentality, 'Pilih Convidentality')}
                 >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
@@ -193,7 +202,7 @@ export default function DataBarangAsetDetailPage() {
                 <CustomButtonBottomSheet
                   className='flex-1'
                   label={'Integrity'}
-                  value={form.integrity}
+                  value={defaultValue(form.integrity, 'Pilih Integrity')}
                 >
                   <ButtonBottomSheet
                     renderItem={(item, _) => (
@@ -208,14 +217,33 @@ export default function DataBarangAsetDetailPage() {
                 </CustomButtonBottomSheet>
               </Row>
 
-              <CustomDatePicker
-                value={new Date()}
-                label='Tanggal Akuisisi'
-                onDateChange={(date) => {
-                  const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();
-                  console.log('selectedDate', new Date(date.setMinutes(-timeZoneOffsetInMinutes)));
-                }}
-              />
+              <Row className='gap-3'>
+                <CustomDatePicker
+                  className='flex-1'
+                  value={parse(form.tanggalAkuisisi ?? '', 'dd/MM/yyyy', new Date())}
+                  label='Tanggal Akuisisi'
+                  onDateChange={(date) => {
+                    const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();
+                    handleChange(
+                      'tanggalAkuisisi',
+                      format(new Date(date.setMinutes(-timeZoneOffsetInMinutes)), 'dd/MM/yyyy')
+                    );
+                  }}
+                />
+
+                <CustomDatePicker
+                  className='flex-1'
+                  value={parse(form.tanggalDepresiasi ?? '', 'dd/MM/yyyy', new Date())}
+                  label='Tanggal Depresiasi'
+                  onDateChange={(date) => {
+                    const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();
+                    handleChange(
+                      'tanggalDepresiasi',
+                      format(new Date(date.setMinutes(-timeZoneOffsetInMinutes)), 'dd/MM/yyyy')
+                    );
+                  }}
+                />
+              </Row>
             </Column>
           </ScrollView>
         }

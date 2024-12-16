@@ -1,6 +1,6 @@
 import React from 'react';
 import Column from './Column';
-import { Pressable, Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { twMerge } from 'tailwind-merge';
 import Row from './Row';
@@ -11,6 +11,8 @@ type CustomDatePickerProps = {
   label?: string;
   enable?: boolean;
   value?: Date;
+  className?: string;
+  dateFormat?: string;
   onDateChange: (value: Date) => void;
 };
 
@@ -19,25 +21,27 @@ export default function CustomDatePicker({
   onDateChange,
   value,
   enable = true,
+  className,
+  dateFormat,
 }: CustomDatePickerProps) {
   const [show, setShow] = React.useState(false);
 
   return (
-    <Column>
-      {label && <Text className='sfPro400-14 text-gray3'>{label}</Text>}
-      <Pressable onPress={() => setShow((prev) => !prev)}>
+    <Column className={className}>
+      {label && <Text className='leading-none sfPro400-14 line-clamp-1 text-gray3'>{label}</Text>}
+      <TouchableOpacity onPress={() => setShow((prev) => !prev)}>
         <Row
           className={twMerge(
-            'mt-1 w-full gap-2 rounded-[4px] border border-[#E0E0E0] px-4 py-3',
+            'mt-1 h-[3.25rem] w-full gap-2 rounded-[4px] border border-[#E0E0E0] px-4',
             !enable && 'bg-[#F8F8F8]'
           )}
         >
-          <Text className='sfPro300-14 line-clamp-1 flex-1 text-ellipsis'>
-            {format(value ?? new Date(), 'dd/MM/yyyy') ?? `Pilih ${label}`}
+          <Text className='flex-1 leading-none sfPro300-14 line-clamp-1'>
+            {format(value ?? new Date(), dateFormat ?? 'dd/MM/yyyy') ?? `Pilih ${label}`}
           </Text>
           <Ionicons name='chevron-down' size={16} color='#333333' />
         </Row>
-      </Pressable>
+      </TouchableOpacity>
       {show && (
         <RNDateTimePicker
           value={value ?? new Date()}

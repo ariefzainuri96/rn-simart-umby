@@ -1,6 +1,6 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { ReactNode, useCallback, useEffect, useRef } from 'react';
-import { Dimensions, Pressable, Text } from 'react-native';
+import { Dimensions, Pressable, Text, TouchableOpacity } from 'react-native';
 import Column from './Column';
 import Row from './Row';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import { twMerge } from 'tailwind-merge';
 type CustomButtonBottomSheetProps = {
   label?: string;
   value?: string;
+  error?: string;
   bottomSheetTitle?: string;
   children: ReactNode;
   className?: string;
@@ -19,6 +20,7 @@ type CustomButtonBottomSheetProps = {
 export default function CustomButtonBottomSheet({
   label,
   value,
+  error,
   children,
   enable = true,
   bottomSheetTitle = 'Pilih Item',
@@ -49,21 +51,20 @@ export default function CustomButtonBottomSheet({
 
   return (
     <>
-      <Column className={className}>
-        {label && <Text className='sfPro500-14 text-gray3'>{label}</Text>}
-        <Pressable onPress={handlePresentModalPress}>
+      <Column className={twMerge('w-full', className)}>
+        {label && <Text className='leading-none sfPro400-14 line-clamp-1 text-gray3'>{label}</Text>}
+        <TouchableOpacity onPress={handlePresentModalPress}>
           <Row
             className={twMerge(
-              'mt-1 w-full gap-2 rounded-[4px] border border-[#E0E0E0] px-4 py-3',
+              'mt-1 h-[3.25rem] w-full gap-2 rounded-[4px] border border-[#E0E0E0] px-4',
               !enable && 'bg-[#F8F8F8]'
             )}
           >
-            <Text className='sfPro300-14 line-clamp-1 flex-1 text-ellipsis'>
-              {value ?? `Pilih ${label}`}
-            </Text>
+            <Text className='flex-1 leading-none sfPro300-14 line-clamp-1'>{value}</Text>
             <Ionicons name='chevron-down' size={16} color='#333333' />
           </Row>
-        </Pressable>
+        </TouchableOpacity>
+        {error && <Text className='mt-1 font-SfPro300 text-[.75rem] text-red1'>{error}</Text>}
       </Column>
       <BottomSheetModal
         // leave it to empty if we want the height to be dynamic
