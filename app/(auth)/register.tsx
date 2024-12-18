@@ -1,4 +1,4 @@
-import { useAuth } from '@/context/auth';
+import { useAuth } from '@/features/auth-context';
 import React from 'react';
 import { View, Button, Text } from 'react-native';
 

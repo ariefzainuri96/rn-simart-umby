@@ -1,17 +1,17 @@
-import { useDashboard } from '@/hooks/use-dashboard';
+import { useDashboard } from '@/features/(app)/index/hooks/use-dashboard';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CustomStateView from '@/components/reusable-component/CustomStateView';
-import Column from '@/components/reusable-component/Column';
+import CustomStateView from '@/components/CustomStateView';
+import Column from '@/components/Column';
 import { LinearGradient } from 'expo-linear-gradient';
 import IcScan from '@/assets/icons/ic-scan-qr.svg';
-import CustomAppbar from '@/components/reusable-component/CustomAppbar';
+import CustomAppbar from '@/components/CustomAppbar';
 import { router } from 'expo-router';
-import NewsSkeleton from '@/components/page-component/dashboard/component/news-skeleton';
-import HeaderSection from '@/components/page-component/dashboard/section/header-section';
-import MenuSection from '@/components/page-component/dashboard/section/menu-section';
-import NewsSection from '@/components/page-component/dashboard/section/news-section';
+import NewsSkeleton from '@/features/(app)/index/components/news-skeleton';
+import HeaderSection from '@/features/(app)/index/sections/header-section';
+import MenuSection from '@/features/(app)/index/sections/menu-section';
+import NewsSection from '@/features/(app)/index/sections/news-section';
 import { getState } from '@/helper/utils';
 
 export default function DashboardPage() {

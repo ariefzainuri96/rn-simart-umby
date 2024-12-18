@@ -1,9 +1,9 @@
 import { Image, ScrollView, Text, View } from 'react-native';
 import Constants from 'expo-constants';
-import CustomInput from '@/components/reusable-component/CustomInput';
-import CustomButton from '@/components/reusable-component/CustomButton';
-import CustomCheckbox from '@/components/reusable-component/CustomCheckbox';
-import useLogin from '@/hooks/use-login';
+import CustomInput from '@/components/CustomInput';
+import CustomButton from '@/components/CustomButton';
+import CustomCheckbox from '@/components/CustomCheckbox';
+import useLogin from '@/features/(auth)/login/hooks/use-login';
 
 const LoginPage = () => {
   const { form, handleLogin, queryLogin, handleChange } = useLogin();

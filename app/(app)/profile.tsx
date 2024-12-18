@@ -1,14 +1,14 @@
-import Column from '@/components/reusable-component/Column';
-import CustomAppbar from '@/components/reusable-component/CustomAppbar';
-import CustomInput from '@/components/reusable-component/CustomInput';
+import Column from '@/components/Column';
+import CustomAppbar from '@/components/CustomAppbar';
+import CustomInput from '@/components/CustomInput';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import useProfile from '../../hooks/profile/use-profile';
-import CustomButton from '@/components/reusable-component/CustomButton';
+import useProfile from '../../features/(app)/profile/hooks/use-profile';
+import CustomButton from '@/components/CustomButton';
 import Constants from 'expo-constants';
-import CommonMenu from '@/components/reusable-component/CommonMenu';
-import { useAuth } from '@/context/auth';
-import CustomStateView from '@/components/reusable-component/CustomStateView';
+import CommonMenu from '@/components/CommonMenu';
+import { useAuth } from '@/features/auth-context';
+import CustomStateView from '@/components/CustomStateView';
 import { getState } from '@/helper/utils';
 
 function ProfilePage() {

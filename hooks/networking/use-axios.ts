@@ -1,4 +1,4 @@
-import { useAuth } from '@/context/auth';
+import { useAuth } from '@/features/auth-context';
 import axios, {
   AxiosError,
   AxiosRequestConfig,
@@ -12,11 +12,13 @@ const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConf
   // Set Headers Here
   // Check Authentication Here
   // Set Loading Start Here
-  console.log(`🚀 [API] ${method?.toUpperCase()} ${url} | Request => ${JSON.stringify(data)}`);
-
-  if (method === 'get') {
-    config.timeout = 15000;
+  if (data) {
+    console.log(`🚀 [API] ${method?.toUpperCase()} ${url} | Request => ${JSON.stringify(data)}`);
   }
+
+  // if (method === 'get') {
+  //   config.timeout = 15000;
+  // }
   return config;
 };
 
@@ -78,7 +80,7 @@ export default function useAxios() {
   const auth = useAuth();
 
   const axiosInstance = axios.create({
-    baseURL: 'http://192.168.230.202:9000',
+    baseURL: 'http://192.168.165.161:9000',
     timeout: 10000,
     headers: {
       'Content-Type': 'application/json',

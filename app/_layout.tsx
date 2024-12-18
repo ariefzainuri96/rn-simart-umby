@@ -3,7 +3,7 @@ import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { useColorScheme } from '@/hooks/theme/useColorScheme';
-import { AuthProvider } from '@/context/auth';
+import { AuthProvider } from '@/features/auth-context';
 import { useFonts } from 'expo-font';
 export {
   // Catch any errors thrown by the Layout component.
@@ -11,7 +11,7 @@ export {
 } from 'expo-router';
 import 'react-native-reanimated';
 import '@/global.css';
-import AppInit from '@/components/reusable-component/AppInit';
+import AppInit from '@/components/AppInit';
 import { delay } from '@/helper/utils';
 import { configureReanimatedLogger, ReanimatedLogLevel } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';

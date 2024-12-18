@@ -1,7 +1,7 @@
-import Column from '@/components/reusable-component/Column';
-import CustomAppbar from '@/components/reusable-component/CustomAppbar';
-import CustomButton from '@/components/reusable-component/CustomButton';
-import Row from '@/components/reusable-component/Row';
+import Column from '@/components/Column';
+import CustomAppbar from '@/components/CustomAppbar';
+import CustomButton from '@/components/CustomButton';
+import Row from '@/components/Row';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';

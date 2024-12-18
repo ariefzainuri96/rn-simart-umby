@@ -1,6 +1,6 @@
-import Column from '@/components/reusable-component/Column';
-import CommonMenu from '@/components/reusable-component/CommonMenu';
-import CustomAppbar from '@/components/reusable-component/CustomAppbar';
+import Column from '@/components/Column';
+import CommonMenu from '@/components/CommonMenu';
+import CustomAppbar from '@/components/CustomAppbar';
 import { useRouter } from 'expo-router';
 import React from 'react';
 

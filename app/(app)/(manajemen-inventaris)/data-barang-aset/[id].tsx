@@ -1,15 +1,15 @@
-import ButtonBottomSheet from '@/components/page-component/data-barang-aset/[id]/button-bottom-sheet';
-import Column from '@/components/reusable-component/Column';
-import CustomAppbar from '@/components/reusable-component/CustomAppbar';
-import CustomButtonBottomSheet from '@/components/reusable-component/CustomButtonBottomSheet';
-import CustomCheckbox from '@/components/reusable-component/CustomCheckbox';
-import CustomDatePicker from '@/components/reusable-component/CustomDatePicker';
-import CustomInput from '@/components/reusable-component/CustomInput';
-import CustomStateView from '@/components/reusable-component/CustomStateView';
-import Row from '@/components/reusable-component/Row';
-import StandartBottomSheetItem from '@/components/reusable-component/StandartBottomSheetItem';
+import ButtonBottomSheet from '@/features/(app)/(manajemen-inventaris)/data-barang-aset/[id]/components/button-bottom-sheet';
+import Column from '@/components/Column';
+import CustomAppbar from '@/components/CustomAppbar';
+import CustomButtonBottomSheet from '@/components/CustomButtonBottomSheet';
+import CustomCheckbox from '@/components/CustomCheckbox';
+import CustomDatePicker from '@/components/CustomDatePicker';
+import CustomInput from '@/components/CustomInput';
+import CustomStateView from '@/components/CustomStateView';
+import Row from '@/components/Row';
+import StandartBottomSheetItem from '@/components/StandartBottomSheetItem';
 import { defaultValue, getState } from '@/helper/utils';
-import useEditDataBarangAset from '@/hooks/data-barang-aset/use-edit-data-barang-aset';
+import useEditDataBarangAset from '@/features/(app)/(manajemen-inventaris)/data-barang-aset/[id]/hooks/use-edit-data-barang-aset';
 import { format, parse } from 'date-fns';
 import { useLocalSearchParams } from 'expo-router';
 import { ScrollView, View } from 'react-native';
@@ -220,7 +220,7 @@ export default function DataBarangAsetDetailPage() {
               <Row className='gap-3'>
                 <CustomDatePicker
                   className='flex-1'
-                  value={parse(form.tanggalAkuisisi ?? '', 'dd/MM/yyyy', new Date())}
+                  value={parse(form.tanggalAkuisisi ?? '01/01/2010', 'dd/MM/yyyy', new Date(2010))}
                   label='Tanggal Akuisisi'
                   onDateChange={(date) => {
                     const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();
@@ -233,7 +233,11 @@ export default function DataBarangAsetDetailPage() {
 
                 <CustomDatePicker
                   className='flex-1'
-                  value={parse(form.tanggalDepresiasi ?? '', 'dd/MM/yyyy', new Date())}
+                  value={parse(
+                    form.tanggalDepresiasi ?? '01/01/2010',
+                    'dd/MM/yyyy',
+                    new Date(2010)
+                  )}
                   label='Tanggal Depresiasi'
                   onDateChange={(date) => {
                     const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();

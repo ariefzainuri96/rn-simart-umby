@@ -1,10 +1,10 @@
-import CustomAppbar from '@/components/reusable-component/CustomAppbar';
+import CustomAppbar from '@/components/CustomAppbar';
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import CustomStateView from '@/components/reusable-component/CustomStateView';
+import CustomStateView from '@/components/CustomStateView';
 import Constants from 'expo-constants';
-import useDataBarangAset from '@/hooks/data-barang-aset/use-data-barang-aset';
-import DataBarangAsetItem from '@/components/page-component/data-barang-aset/data-barang-aset-item';
+import useDataBarangAset from '@/features/(app)/(manajemen-inventaris)/data-barang-aset/index/hooks/use-data-barang-aset';
+import DataBarangAsetItem from '@/features/(app)/(manajemen-inventaris)/data-barang-aset/index/components/data-barang-aset-item';
 
 export default function DataBarangAsetPage() {
   const { dataBarangAsetList, fetchData, dataBarangAsetState } = useDataBarangAset();
