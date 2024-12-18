@@ -1,6 +1,6 @@
 import { useAuth } from '@/features/auth-context';
 import { LoginForm, LoginSchema } from '@/features/(auth)/login/types/login-form';
-import { ZodValidationError } from '@/models/zod-validation-error';
+import { ZodValidationError } from '@/types/zod-validation-error';
 import { useEffect, useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { NIS, PASSWORD } from '@/constants/secure-store-key';

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ZodValidationError } from '../../../../models/zod-validation-error';
+import { ZodValidationError } from '../../../../types/zod-validation-error';
 
 export type LoginForm = {
   nis: string;
